@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: #1f1f1f;
+    }
+
+    header {
+      width: 100%;
+      background: #0d47a1;
+      color: white;
+      padding: 18px 0;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .area-title {
+      background: #0d47a1;
+      color: #ffffff;
+      padding: 14px 20px;
+      font-size: 17px;
+      border-bottom-right-radius: 20px;
+      width: max-content;
+      margin: 20px 0 0 0;
+      font-weight: bold;
+    }
+
+    .section-container {
+      padding: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    p.subtitle {
+      margin: 4px 0 20px 0;
+      font-size: 13px;
+      color: #5a5a5a;
+    }
+
+    .line-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 15px 0;
+    }
+
+    .line-field label {
+      font-size: 15px;
+    }
+
+    .line-field input,
+    .line-field select {
+      border: none;
+      background: none;
+      font-size: 14px;
+      text-align: right;
+      width: 180px;
+      outline: none;
+      color: #696969;
+    }
+
+    .placeholder {
+      color: #9e9e9e;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</header>
+
+  <div class="area-title">Área 1</div>
+
+  <div class="section-container">
+    <h2>Dados gerais</h2>
+    <p class="subtitle">Insira uma descrição</p>
+
+    <div class="line-field">
+      <label>Data da visita</label>
+      <input type="date" />
+    </div>
+
+    <div class="line-field">
+      <label>Nome do analista de atendimento</label>
+      <select>
+        <option selected disabled class="placeholder">Seleção única</option>
+      </select>
+    </div>
+
+    <div class="line-field">
+      <label>Nome do cliente</label>
+      <input type="text" placeholder="Texto curto">
+    </div>
+
+    <div class="line-field">
+      <label>Cidade/ Estado</label>
+      <input type="text" placeholder="Texto curto">
+    </div>
+
+  </div>
+
+</body>
+</html>
