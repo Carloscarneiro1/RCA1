@@ -6,11 +6,15 @@
   <title>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
       padding: 0;
-      background: #ffffff;
+      background: #f4f5f7;
       color: #1f1f1f;
     }
 
@@ -27,17 +31,23 @@
     .area-title {
       background: #0d47a1;
       color: #ffffff;
-      padding: 14px 20px;
+      padding: 14px 24px;
       font-size: 17px;
       border-bottom-right-radius: 20px;
       width: max-content;
-      margin: 20px 0 0 0;
+      margin: 24px auto 0 24px;
       font-weight: bold;
     }
 
     .section-container {
-      padding: 20px;
-      border-top: 1px solid #e0e0e0;
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 22px 22px 26px;
+      margin-top: 12px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+      border: 1px solid #e5e7eb;
     }
 
     h2 {
@@ -52,32 +62,74 @@
       color: #5a5a5a;
     }
 
-    .line-field {
+    .field {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #e0e0e0;
-      padding: 15px 0;
+      flex-direction: column;
+      margin-bottom: 18px;
     }
 
-    .line-field label {
-      font-size: 15px;
-    }
-
-    .line-field input,
-    .line-field select {
-      border: none;
-      background: none;
+    .field label {
       font-size: 14px;
-      text-align: right;
-      width: 180px;
+      margin-bottom: 4px;
+    }
+
+    .required {
+      color: #e53935;
+      font-weight: bold;
+      margin-left: 2px;
+    }
+
+    .input-shell {
+      position: relative;
+    }
+
+    .input-shell input,
+    .input-shell select {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      background: #f3f4f6;
+      padding: 10px 12px;
+      font-size: 14px;
       outline: none;
-      color: #696969;
+      transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      appearance: none;
     }
 
-    .placeholder {
-      color: #9e9e9e;
-      font-size: 14px;
+    .input-shell input:focus,
+    .input-shell select:focus {
+      border-color: #1976d2;
+      box-shadow: 0 0 0 2px rgba(25,118,210,0.25);
+      background: #ffffff;
+    }
+
+    /* Ícone de calendário no campo data (o navegador já abre o calendário, isso é só visual) */
+    .input-shell.date-shell::after {
+      content: "📅";
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .section-container {
+        margin: 8px 12px 24px;
+        padding: 18px 16px 22px;
+      }
+
+      .area-title {
+        margin-left: 12px;
+      }
     }
   </style>
 </head>
@@ -92,26 +144,57 @@
     <h2>Dados gerais</h2>
     <p class="subtitle">Insira uma descrição</p>
 
-    <div class="line-field">
-      <label>Data da visita</label>
-      <input type="date" />
+    <!-- DATA DA VISITA -->
+    <div class="field">
+      <label for="dataVisita">Data da visita<span class="required">*</span></label>
+      <div class="input-shell date-shell">
+        <input type="date" id="dataVisita" />
+      </div>
+      <span class="hint">Clique no campo para abrir o calendário.</span>
     </div>
 
-    <div class="line-field">
-      <label>Nome do analista de atendimento</label>
-      <select>
-        <option selected disabled class="placeholder">Seleção única</option>
-      </select>
+    <!-- NOME DO ANALISTA - LISTA (ÁRVORE) DE OPÇÕES -->
+    <div class="field">
+      <label for="analista">Nome do analista de atendimento<span class="required">*</span></label>
+      <div class="input-shell">
+        <!-- input com datalist para digitar e pesquisar -->
+        <input
+          id="analista"
+          list="listaAnalistas"
+          placeholder="Digite para pesquisar"
+        />
+        <datalist id="listaAnalistas">
+          <option value="Leandro Nogueira"></option>
+          <option value="Mayara Rodrigues"></option>
+          <option value="Celso Penteado"></option>
+          <option value="Carlos Carneiro"></option>
+        </datalist>
+      </div>
+      <span class="hint">Comece a digitar o nome e escolha na lista.</span>
     </div>
 
-    <div class="line-field">
-      <label>Nome do cliente</label>
-      <input type="text" placeholder="Texto curto">
+    <!-- NOME DO CLIENTE -->
+    <div class="field">
+      <label for="nomeCliente">Nome do cliente</label>
+      <div class="input-shell">
+        <input
+          type="text"
+          id="nomeCliente"
+          placeholder="Digite o nome do cliente"
+        />
+      </div>
     </div>
 
-    <div class="line-field">
-      <label>Cidade/ Estado</label>
-      <input type="text" placeholder="Texto curto">
+    <!-- CIDADE / ESTADO -->
+    <div class="field">
+      <label for="cidadeEstado">Cidade / Estado</label>
+      <div class="input-shell">
+        <input
+          type="text"
+          id="cidadeEstado"
+          placeholder="Ex.: Jacareí / SP"
+        />
+      </div>
     </div>
 
   </div>
