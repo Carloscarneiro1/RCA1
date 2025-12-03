@@ -14,63 +14,71 @@
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f5f7;
-      color: #1f1f1f;
+      background: #f3f4f6;
+      color: #1f2933;
     }
 
+    /* CABEÇALHO GERAL */
     header {
       width: 100%;
       background: #0d47a1;
-      color: white;
+      color: #ffffff;
       padding: 18px 0;
       text-align: center;
       font-size: 20px;
       font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    /* BARRA "ÁREA 1" */
+    .area-strip {
+      background: #0d47a1;
+      padding: 0 16px;
     }
 
     .area-title {
       background: #0d47a1;
       color: #ffffff;
-      padding: 14px 24px;
-      font-size: 17px;
-      border-bottom-right-radius: 20px;
-      width: max-content;
-      margin: 24px auto 0 24px;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-bottom-right-radius: 22px;
+      display: inline-block;
       font-weight: bold;
     }
 
+    /* CAIXA PRINCIPAL DOS CAMPOS */
     .section-container {
-      max-width: 800px;
+      max-width: 960px;
       margin: 0 auto;
       background: #ffffff;
-      border-radius: 12px;
-      padding: 22px 22px 26px;
-      margin-top: 12px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.06);
-      border: 1px solid #e5e7eb;
+      padding: 24px 32px 32px;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      border-top: 1px solid #e5e7eb;
     }
 
     h2 {
       margin: 0;
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 20px;
+      font-weight: 600;
+      color: #1f2933;
     }
 
     p.subtitle {
-      margin: 4px 0 20px 0;
+      margin: 4px 0 22px;
       font-size: 13px;
-      color: #5a5a5a;
+      color: #6b7280;
     }
 
+    /* CAMPOS ESTILO MATERIAL */
     .field {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
 
-    .field label {
+    .field-title {
       font-size: 14px;
       margin-bottom: 4px;
+      color: #374151;
     }
 
     .required {
@@ -79,40 +87,64 @@
       margin-left: 2px;
     }
 
-    .input-shell {
+    .md-input {
       position: relative;
-    }
-
-    .input-shell input,
-    .input-shell select {
-      width: 100%;
+      display: flex;
+      align-items: center;
+      background: #f5f5f5;
       border-radius: 8px;
       border: 1px solid #d1d5db;
-      background: #f3f4f6;
-      padding: 10px 12px;
-      font-size: 14px;
-      outline: none;
+      padding: 10px 12px 6px;
       transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-      appearance: none;
     }
 
-    .input-shell input:focus,
-    .input-shell select:focus {
-      border-color: #1976d2;
-      box-shadow: 0 0 0 2px rgba(25,118,210,0.25);
-      background: #ffffff;
+    .md-input input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      padding: 10px 0 4px;
+      font-size: 14px;
+      color: #111827;
     }
 
-    /* Ícone de calendário no campo data (o navegador já abre o calendário, isso é só visual) */
-    .input-shell.date-shell::after {
-      content: "📅";
+    .md-input input::placeholder {
+      color: #9ca3af;
+    }
+
+    .md-label {
+      position: absolute;
+      left: 12px;
+      top: 6px;
+      font-size: 11px;
+      color: #6b7280;
+      pointer-events: none;
+    }
+
+    .md-icon {
       position: absolute;
       right: 10px;
       top: 50%;
-      transform: translateY(-50%);
+      transform: translateY(-25%);
       font-size: 16px;
+      color: #757575;
       pointer-events: none;
-      opacity: 0.7;
+    }
+
+    .md-arrow {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-10%);
+      font-size: 14px;
+      color: #757575;
+      pointer-events: none;
+    }
+
+    .md-input:focus-within {
+      background: #ffffff;
+      border-color: #1976d2;
+      box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.22);
     }
 
     .hint {
@@ -121,14 +153,11 @@
       margin-top: 2px;
     }
 
-    @media (max-width: 600px) {
+    /* RESPONSIVO */
+    @media (max-width: 768px) {
       .section-container {
-        margin: 8px 12px 24px;
-        padding: 18px 16px 22px;
-      }
-
-      .area-title {
-        margin-left: 12px;
+        margin: 0 8px 16px;
+        padding: 20px 16px 24px;
       }
     }
   </style>
@@ -138,7 +167,9 @@
 
   <header>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</header>
 
-  <div class="area-title">Área 1</div>
+  <div class="area-strip">
+    <div class="area-title">Área 1</div>
+  </div>
 
   <div class="section-container">
     <h2>Dados gerais</h2>
@@ -146,23 +177,30 @@
 
     <!-- DATA DA VISITA -->
     <div class="field">
-      <label for="dataVisita">Data da visita<span class="required">*</span></label>
-      <div class="input-shell date-shell">
-        <input type="date" id="dataVisita" />
+      <div class="field-title">
+        Data da visita<span class="required">*</span>
       </div>
-      <span class="hint">Clique no campo para abrir o calendário.</span>
+      <div class="md-input">
+        <span class="md-label">Data</span>
+        <input type="date" id="dataVisita">
+        <span class="md-icon">📅</span>
+      </div>
+      <div class="hint">Clique no campo para selecionar a data no calendário.</div>
     </div>
 
-    <!-- NOME DO ANALISTA - LISTA (ÁRVORE) DE OPÇÕES -->
+    <!-- NOME DO ANALISTA -->
     <div class="field">
-      <label for="analista">Nome do analista de atendimento<span class="required">*</span></label>
-      <div class="input-shell">
-        <!-- input com datalist para digitar e pesquisar -->
+      <div class="field-title">
+        Nome do analista de atendimento<span class="required">*</span>
+      </div>
+      <div class="md-input">
+        <span class="md-label">Selecione</span>
         <input
           id="analista"
           list="listaAnalistas"
           placeholder="Digite para pesquisar"
-        />
+        >
+        <span class="md-arrow">▾</span>
         <datalist id="listaAnalistas">
           <option value="Leandro Nogueira"></option>
           <option value="Mayara Rodrigues"></option>
@@ -170,30 +208,31 @@
           <option value="Carlos Carneiro"></option>
         </datalist>
       </div>
-      <span class="hint">Comece a digitar o nome e escolha na lista.</span>
     </div>
 
     <!-- NOME DO CLIENTE -->
     <div class="field">
-      <label for="nomeCliente">Nome do cliente</label>
-      <div class="input-shell">
+      <div class="field-title">Nome do cliente</div>
+      <div class="md-input">
+        <span class="md-label">Texto curto</span>
         <input
           type="text"
           id="nomeCliente"
           placeholder="Digite o nome do cliente"
-        />
+        >
       </div>
     </div>
 
     <!-- CIDADE / ESTADO -->
     <div class="field">
-      <label for="cidadeEstado">Cidade / Estado</label>
-      <div class="input-shell">
+      <div class="field-title">Cidade/ Estado</div>
+      <div class="md-input">
+        <span class="md-label">Texto curto</span>
         <input
           type="text"
           id="cidadeEstado"
           placeholder="Ex.: Jacareí / SP"
-        />
+        >
       </div>
     </div>
 
