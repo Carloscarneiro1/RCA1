@@ -334,10 +334,9 @@
         <textarea id="obsReclamacao" rows="3"></textarea>
       </div>
       <div class="attach-row">
-        <div class="attach-label">📎 ANEXAR ARQUIVO(S)</div><br>
-        <input type="file" id="anexoObs" multiple>
+        <div class="attach-label">📎 ANEXAR ARQUIVO(S) (ATÉ 10)</div><br>
+        <input type="file" id="anexoObs" multiple accept="image/*">
       </div>
-      <!-- Pré-visualização dos anexos de observações -->
       <div id="previewObs" class="preview-container"></div>
     </div>
   </div>
@@ -357,10 +356,9 @@
         <textarea id="comentariosGerais" rows="3" placeholder="Descreva sua análise técnica aqui"></textarea>
       </div>
       <div class="attach-row">
-        <div class="attach-label">📎 ANEXAR ARQUIVO(S)</div><br>
-        <input type="file" id="anexoAnaliseTecnica" multiple>
+        <div class="attach-label">📎 ANEXAR ARQUIVO(S) (ATÉ 10)</div><br>
+        <input type="file" id="anexoAnaliseTecnica" multiple accept="image/*">
       </div>
-      <!-- Pré-visualização dos anexos da análise técnica -->
       <div id="previewAnaliseTecnica" class="preview-container"></div>
     </div>
   </div>
@@ -384,7 +382,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-  // Banco de perguntas por defeito
   const perguntasPorDefeito = {
     "DEFEITOS PONTUAIS": [
       "FOI ENCONTRADO ANTES OU DEPOIS DO PROCESSAMENTO?",
@@ -482,7 +479,7 @@
     perguntasContainer.innerHTML = html;
   });
 
-  // Função genérica para configurar pré-visualização
+  // Função de pré-visualização com limite de 10 arquivos
   function setupPreview(inputId, previewId) {
     const input = document.getElementById(inputId);
     const preview = document.getElementById(previewId);
@@ -490,11 +487,16 @@
 
     input.addEventListener("change", () => {
       preview.innerHTML = "";
-      const files = input.files;
-      if (!files || !files.length) return;
+      const allFiles = Array.from(input.files || []);
 
-      Array.from(files).forEach(file => {
-        // Se for imagem, mostra thumbnail
+      if (!allFiles.length) return;
+
+      const files = allFiles.slice(0, 10); // limita a 10
+      if (allFiles.length > 10) {
+        alert("Você selecionou " + allFiles.length + " arquivos. Apenas os 10 primeiros serão considerados.");
+      }
+
+      files.forEach(file => {
         if (file.type.startsWith("image/")) {
           const reader = new FileReader();
           reader.onload = e => {
@@ -506,7 +508,6 @@
           };
           reader.readAsDataURL(file);
         } else {
-          // Arquivo que não é imagem: mostra só o nome
           const p = document.createElement("div");
           p.className = "preview-file";
           p.textContent = "Arquivo: " + file.name;
@@ -516,11 +517,9 @@
     });
   }
 
-  // Ativa pré-visualização nos dois campos de anexo
   setupPreview("anexoObs", "previewObs");
   setupPreview("anexoAnaliseTecnica", "previewAnaliseTecnica");
 
-  // GERAÇÃO DE PDF (captura o container inteiro, incluindo imagens pré-visualizadas)
   async function gerarPDF() {
     const { jsPDF } = window.jspdf;
     const rac = document.getElementById("rac-container");
