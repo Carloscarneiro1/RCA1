@@ -18,7 +18,7 @@
 
     header {
       width: 100%;
-      background: #0d47a1;
+      background: #f97316;
       color: #ffffff;
       padding: 18px 0;
       text-align: center;
@@ -28,12 +28,12 @@
     }
 
     .area-strip {
-      background: #0d47a1;
+      background: #f97316;
       padding: 0 16px;
     }
 
     .area-title {
-      background: #0d47a1;
+      background: #f97316;
       color: #ffffff;
       padding: 12px 24px;
       font-size: 16px;
@@ -52,9 +52,7 @@
       border-top: 1px solid #e5e7eb;
     }
 
-    .section-header {
-      margin-bottom: 22px;
-    }
+    .section-header { margin-bottom: 22px; }
 
     .section-header h2 {
       margin: 0;
@@ -71,22 +69,14 @@
       margin-top: 6px;
     }
 
-    .field {
-      margin-bottom: 22px;
-    }
-
+    .field { margin-bottom: 22px; }
     .field-title {
       font-size: 14px;
       margin-bottom: 4px;
       color: #374151;
       font-weight: 600;
     }
-
-    .required {
-      color: #e53935;
-      font-weight: bold;
-      margin-left: 2px;
-    }
+    .required { color: #e53935; font-weight: bold; margin-left: 2px; }
 
     .md-input {
       position: relative;
@@ -125,17 +115,7 @@
       pointer-events: none;
     }
 
-    .hint {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-top: 2px;
-    }
-
-    .attach-row {
-      margin-top: 6px;
-      font-size: 12px;
-    }
-
+    .attach-row { margin-top: 6px; font-size: 12px; }
     .attach-label {
       display: inline-block;
       margin-bottom: 2px;
@@ -144,10 +124,7 @@
       font-weight: 500;
     }
 
-    .question-block {
-      margin-bottom: 16px;
-    }
-
+    .question-block { margin-bottom: 16px; }
     .question-text {
       font-size: 13px;
       font-weight: 600;
@@ -155,7 +132,6 @@
       margin-bottom: 4px;
     }
 
-    /* PRÉ-VISUALIZAÇÃO DE IMAGENS/ARQUIVOS */
     .preview-container {
       margin-top: 8px;
       display: flex;
@@ -179,7 +155,6 @@
       border: 1px dashed #d1d5db;
     }
 
-    /* BOTÕES DE AÇÃO */
     .actions {
       text-align: right;
       margin-top: 12px;
@@ -194,31 +169,11 @@
       font-size: 14px;
       font-weight: 600;
       margin-left: 8px;
-      transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+      transition: .1s ease;
     }
 
-    .btn-primary {
-      background: #f97316;
-      color: #fff;
-      box-shadow: 0 4px 10px rgba(249, 115, 22, 0.4);
-    }
-
-    .btn-primary:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 14px rgba(249, 115, 22, 0.5);
-    }
-
-    .btn-secondary {
-      background: #e5e7eb;
-      color: #111827;
-    }
-
-    .btn-secondary:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(148, 163, 184, 0.4);
-    }
+    .btn-primary { background: #f97316; color: #fff; }
+    .btn-secondary { background: #e5e7eb; color: #111827; }
 
     @media (max-width: 768px) {
       .section-container {
@@ -353,7 +308,8 @@
     <div class="field">
       <div class="field-title">Comentários gerais referente ao atendimento</div>
       <div class="md-input">
-        <textarea id="comentariosGerais" rows="3" placeholder="Descreva sua análise técnica aqui"></textarea>
+        <textarea id="comentariosGerais" rows="3"
+        placeholder="Descreva sua análise técnica aqui"></textarea>
       </div>
       <div class="attach-row">
         <div class="attach-label">📎 ANEXAR ARQUIVO(S) (ATÉ 10)</div><br>
@@ -375,9 +331,9 @@
     </div>
   </div>
 
-</div> <!-- fim rac-container -->
+</div>
 
-<!-- BIBLIOTECAS PARA PDF -->
+<!-- BIBLIOTECAS DE PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -475,26 +431,17 @@
           </div>
         </div>`;
     });
-
     perguntasContainer.innerHTML = html;
   });
 
-  // Função de pré-visualização com limite de 10 arquivos
   function setupPreview(inputId, previewId) {
     const input = document.getElementById(inputId);
     const preview = document.getElementById(previewId);
-    if (!input || !preview) return;
+    if (!input) return;
 
     input.addEventListener("change", () => {
       preview.innerHTML = "";
-      const allFiles = Array.from(input.files || []);
-
-      if (!allFiles.length) return;
-
-      const files = allFiles.slice(0, 10); // limita a 10
-      if (allFiles.length > 10) {
-        alert("Você selecionou " + allFiles.length + " arquivos. Apenas os 10 primeiros serão considerados.");
-      }
+      const files = Array.from(input.files).slice(0, 10);
 
       files.forEach(file => {
         if (file.type.startsWith("image/")) {
@@ -502,16 +449,10 @@
           reader.onload = e => {
             const img = document.createElement("img");
             img.src = e.target.result;
-            img.alt = file.name;
             img.className = "preview-img";
             preview.appendChild(img);
           };
           reader.readAsDataURL(file);
-        } else {
-          const p = document.createElement("div");
-          p.className = "preview-file";
-          p.textContent = "Arquivo: " + file.name;
-          preview.appendChild(p);
         }
       });
     });
