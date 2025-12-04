@@ -125,6 +125,12 @@
       pointer-events: none;
     }
 
+    .hint {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+
     .attach-row {
       margin-top: 6px;
       font-size: 12px;
@@ -149,10 +155,28 @@
       margin-bottom: 4px;
     }
 
-    .hint {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-top: 2px;
+    /* PRÉ-VISUALIZAÇÃO DE IMAGENS/ARQUIVOS */
+    .preview-container {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .preview-img {
+      max-width: 150px;
+      max-height: 150px;
+      border-radius: 4px;
+      border: 1px solid #d1d5db;
+      object-fit: cover;
+    }
+
+    .preview-file {
+      font-size: 12px;
+      padding: 4px 8px;
+      background: #f3f4f6;
+      border-radius: 4px;
+      border: 1px dashed #d1d5db;
     }
 
     /* BOTÕES DE AÇÃO */
@@ -194,6 +218,13 @@
       opacity: 0.9;
       transform: translateY(-1px);
       box-shadow: 0 4px 10px rgba(148, 163, 184, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .section-container {
+        margin: 0 8px 16px;
+        padding: 20px 16px 24px;
+      }
     }
   </style>
 </head>
@@ -306,6 +337,8 @@
         <div class="attach-label">📎 ANEXAR ARQUIVO(S)</div><br>
         <input type="file" id="anexoObs" multiple>
       </div>
+      <!-- Pré-visualização dos anexos de observações -->
+      <div id="previewObs" class="preview-container"></div>
     </div>
   </div>
 
@@ -327,6 +360,8 @@
         <div class="attach-label">📎 ANEXAR ARQUIVO(S)</div><br>
         <input type="file" id="anexoAnaliseTecnica" multiple>
       </div>
+      <!-- Pré-visualização dos anexos da análise técnica -->
+      <div id="previewAnaliseTecnica" class="preview-container"></div>
     </div>
   </div>
 
@@ -337,20 +372,19 @@
       <div class="title-underline"></div>
     </div>
     <div class="actions">
-      <!-- sem funcionalidade por enquanto, como você pediu -->
       <button type="button" class="btn btn-secondary">Registrar</button>
-      <!-- botão que gera o PDF -->
       <button type="button" class="btn btn-primary" onclick="gerarPDF()">Exportar em PDF</button>
     </div>
   </div>
 
-</div> <!-- fim do rac-container -->
+</div> <!-- fim rac-container -->
 
-<!-- BIBLIOTECAS PARA PDF (CDN) -->
+<!-- BIBLIOTECAS PARA PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
+  // Banco de perguntas por defeito
   const perguntasPorDefeito = {
     "DEFEITOS PONTUAIS": [
       "FOI ENCONTRADO ANTES OU DEPOIS DO PROCESSAMENTO?",
@@ -448,7 +482,45 @@
     perguntasContainer.innerHTML = html;
   });
 
-  // GERAÇÃO DE PDF (captura o container inteiro)
+  // Função genérica para configurar pré-visualização
+  function setupPreview(inputId, previewId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    if (!input || !preview) return;
+
+    input.addEventListener("change", () => {
+      preview.innerHTML = "";
+      const files = input.files;
+      if (!files || !files.length) return;
+
+      Array.from(files).forEach(file => {
+        // Se for imagem, mostra thumbnail
+        if (file.type.startsWith("image/")) {
+          const reader = new FileReader();
+          reader.onload = e => {
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.alt = file.name;
+            img.className = "preview-img";
+            preview.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          // Arquivo que não é imagem: mostra só o nome
+          const p = document.createElement("div");
+          p.className = "preview-file";
+          p.textContent = "Arquivo: " + file.name;
+          preview.appendChild(p);
+        }
+      });
+    });
+  }
+
+  // Ativa pré-visualização nos dois campos de anexo
+  setupPreview("anexoObs", "previewObs");
+  setupPreview("anexoAnaliseTecnica", "previewAnaliseTecnica");
+
+  // GERAÇÃO DE PDF (captura o container inteiro, incluindo imagens pré-visualizadas)
   async function gerarPDF() {
     const { jsPDF } = window.jspdf;
     const rac = document.getElementById("rac-container");
