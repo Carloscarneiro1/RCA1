@@ -6,9 +6,7 @@
   <title>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -18,7 +16,6 @@
       color: #1f2933;
     }
 
-    /* CABEÇALHO GERAL */
     header {
       width: 100%;
       background: #0d47a1;
@@ -30,7 +27,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* BARRA "ÁREA" */
     .area-strip {
       background: #0d47a1;
       padding: 0 16px;
@@ -46,7 +42,6 @@
       font-weight: bold;
     }
 
-    /* CAIXA PRINCIPAL DOS CAMPOS */
     .section-container {
       max-width: 960px;
       margin: 0 auto 24px;
@@ -72,11 +67,10 @@
       width: 80px;
       height: 3px;
       border-radius: 999px;
-      background: #f97316; /* laranja */
+      background: #f97316;
       margin-top: 6px;
     }
 
-    /* CAMPOS ESTILO MATERIAL */
     .field {
       margin-bottom: 22px;
     }
@@ -102,7 +96,6 @@
       border-radius: 8px;
       border: 1px solid #d1d5db;
       padding: 10px 12px 6px;
-      transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
 
     .md-input input,
@@ -122,12 +115,6 @@
       min-height: 60px;
     }
 
-    .md-input:focus-within {
-      background: #ffffff;
-      border-color: #1976d2;
-      box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.22);
-    }
-
     .md-arrow {
       position: absolute;
       right: 12px;
@@ -136,12 +123,6 @@
       font-size: 14px;
       color: #757575;
       pointer-events: none;
-    }
-
-    .hint {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-top: 2px;
     }
 
     .attach-row {
@@ -157,7 +138,6 @@
       font-weight: 500;
     }
 
-    /* PERGUNTAS DINÂMICAS */
     .question-block {
       margin-bottom: 16px;
     }
@@ -168,287 +148,232 @@
       text-transform: uppercase;
       margin-bottom: 4px;
     }
-
-    @media (max-width: 768px) {
-      .section-container {
-        margin: 0 8px 16px;
-        padding: 20px 16px 24px;
-      }
-    }
   </style>
 </head>
 
 <body>
 
-  <header>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</header>
+<header>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</header>
 
-  <!-- ÁREA 1 -->
-  <div class="area-strip">
-    <div class="area-title">Área 1</div>
+<!-- ÁREA 1 -->
+<div class="area-strip"><div class="area-title">Área 1</div></div>
+
+<div class="section-container">
+  <div class="section-header">
+    <h2>Dados gerais</h2>
+    <div class="title-underline"></div>
   </div>
 
-  <div class="section-container">
-    <div class="section-header">
-      <h2>Dados gerais</h2>
-      <div class="title-underline"></div>
-    </div>
-
-    <!-- DATA DA VISITA -->
-    <div class="field">
-      <div class="field-title">
-        Data da visita<span class="required">*</span>
-      </div>
-      <div class="md-input">
-        <input type="date" id="dataVisita">
-      </div>
-      <div class="hint">Clique no campo para abrir o calendário.</div>
-    </div>
-
-    <!-- NOME DO ANALISTA -->
-    <div class="field">
-      <div class="field-title">
-        Nome do analista de atendimento<span class="required">*</span>
-      </div>
-      <div class="md-input">
-        <input
-          id="analista"
-          list="listaAnalistas"
-          placeholder="Digite para pesquisar"
-        >
-        <datalist id="listaAnalistas">
-          <option value="Leandro Nogueira"></option>
-          <option value="Mayara Rodrigues"></option>
-          <option value="Celso Penteado"></option>
-          <option value="Carlos Carneiro"></option>
-        </datalist>
-        <span class="md-arrow">▾</span>
-      </div>
-      <div class="hint">Comece a digitar o nome e escolha na lista.</div>
-    </div>
-
-    <!-- NOME DO CLIENTE -->
-    <div class="field">
-      <div class="field-title">Nome do cliente</div>
-      <div class="md-input">
-        <input
-          type="text"
-          id="nomeCliente"
-          placeholder="Digite o nome do cliente"
-        >
-      </div>
-    </div>
-
-    <!-- CIDADE / ESTADO -->
-    <div class="field">
-      <div class="field-title">Cidade / Estado</div>
-      <div class="md-input">
-        <input
-          type="text"
-          id="cidadeEstado"
-          placeholder="Ex.: Jacareí / SP"
-        >
-      </div>
+  <div class="field">
+    <div class="field-title">Data da visita<span class="required">*</span></div>
+    <div class="md-input">
+      <input type="date" id="dataVisita">
     </div>
   </div>
 
-  <!-- ÁREA 2 -->
-  <div class="area-strip">
-    <div class="area-title">Área 2</div>
+  <div class="field">
+    <div class="field-title">Nome do analista<span class="required">*</span></div>
+    <div class="md-input">
+      <input id="analista" list="listaAnalistas" placeholder="Digite para pesquisar">
+      <datalist id="listaAnalistas">
+        <option value="Leandro Nogueira"></option>
+        <option value="Mayara Rodrigues"></option>
+        <option value="Celso Penteado"></option>
+        <option value="Carlos Carneiro"></option>
+      </datalist>
+      <span class="md-arrow">▾</span>
+    </div>
   </div>
 
-  <div class="section-container">
-    <div class="section-header">
-      <h2>Dados da reclamação</h2>
-      <div class="title-underline"></div>
+  <div class="field">
+    <div class="field-title">Nome do cliente</div>
+    <div class="md-input">
+      <input type="text" id="nomeCliente" placeholder="Digite o nome do cliente">
     </div>
-
-    <!-- NÚMERO(S) RO -->
-    <div class="field">
-      <div class="field-title">Número(s) RO</div>
-      <div class="md-input">
-        <input
-          type="text"
-          id="numeroRo"
-          placeholder="Digite o número da RO"
-        >
-      </div>
-    </div>
-
-    <!-- QUANTIDADE TOTAL RECLAMADA -->
-    <div class="field">
-      <div class="field-title">Quantidade total reclamada (m²)</div>
-      <div class="md-input">
-        <input
-          type="number"
-          step="0.01"
-          min="0"
-          id="qtdReclamada"
-          placeholder="00,00"
-        >
-      </div>
-    </div>
-
-    <!-- DEFEITO RECLAMADO -->
-    <div class="field">
-      <div class="field-title">
-        Defeito reclamado<span class="required">*</span>
-      </div>
-      <div class="md-input">
-        <select id="defeitoReclamado" required>
-          <option value="" disabled selected hidden>Selecione</option>
-          <option>DEFEITOS PONTUAIS</option>
-          <option>DIFICULDADE DE CORTE</option>
-          <option>FALTA DE CHAPAS</option>
-          <option>MANCHAS/IRISAÇÃO</option>
-          <option>RISCO</option>
-          <option>VIDRO MOLHADO</option>
-          <option>DEFORMAÇÃO</option>
-          <option>EMPENAMENTO</option>
-          <option>DESLOCAMENTO DE CHAPAS</option>
-        </select>
-        <span class="md-arrow">▾</span>
-      </div>
-    </div>
-
-    <!-- PERGUNTAS RELACIONADAS AO DEFEITO -->
-    <div class="field">
-      <div class="field-title">Perguntas relacionadas ao defeito</div>
-      <div id="perguntasDefeito">
-        <div class="hint">Selecione um defeito para exibir as perguntas.</div>
-      </div>
-    </div>
-
-    <!-- OBSERVAÇÕES GERAIS -->
-    <div class="field">
-      <div class="field-title">Observações</div>
-      <div class="md-input">
-        <textarea
-          id="obsReclamacao"
-          rows="3"
-          placeholder="Digite aqui as observações"
-        ></textarea>
-      </div>
-      <div class="attach-row">
-        <div class="attach-label">📎 ANEXAR ARQUIVO(S)</div><br>
-        <input type="file" id="anexoObs" multiple>
-      </div>
-    </div>
-
   </div>
 
-  <!-- SCRIPT DA ÁRVORE DE PERGUNTAS -->
-  <script>
-    // Banco de perguntas por defeito (tudo em MAIÚSCULO)
-    const perguntasPorDefeito = {
-      "DEFEITOS PONTUAIS": [
-        "FOI ENCONTRADO ANTES OU DEPOIS DO PROCESSAMENTO?",
-        "HOUVE APROVEITAMENTO DA CHAPA?",
-        "O DEFEITO É VISTO EM TODAS AS CHAPAS?",
-        "QUAL A QUANTIDADE DE DEFEITOS?",
-        "QUAL FOI A PERCA REAL?",
-        "TEM AMOSTRAS SEGREGADAS PARA ENVIO?"
-      ],
+  <div class="field">
+    <div class="field-title">Cidade / Estado</div>
+    <div class="md-input">
+      <input type="text" id="cidadeEstado" placeholder="Ex.: Jacareí / SP">
+    </div>
+  </div>
+</div>
 
-      "DIFICULDADE DE CORTE": [
-        "A APLICAÇÃO DO OLEO DE CORTE ESTA NORMAL?",
-        "A PRESSÃO DA FERRAMENTA FOI AJUSTADA?",
-        "HÁ PRESENÇA DE PROBLEMAS NO DESTAQUE ( SERRILHADO, BICOS, TRINCAS, ETC)?",
-        "MESA DE CORTE ESTÁ EM BOAS CONDIÇÕES?",
-        "O MATERIAL ESTA SEGREGADO?",
-        "QUAL A PRESSÃO UTILIZADA NO CORT?",
-        "QUAL FOI A PERDA REAL?",
-        "QUAL O ÂNGULO DO RODIZIO?",
-        "QUANTO TEMPO É FEITO A TROCA DOS RODIZIOS DE CORTE?",
-        "TODAS AS CHAPAS ESTÃO QUEBRANDO DURANTE O CORTE?"
-      ],
+<!-- ÁREA 2 -->
+<div class="area-strip"><div class="area-title">Área 2</div></div>
 
-      "FALTA DE CHAPAS": [
-        "A FALTA DA CHAPA FOI VISTA NO ATO DO DESCARREGAMENTO?",
-        "POSSUI O RIE DA CARGA? GENTILEZA ENVIAR UMA CÓPIA.",
-        "QUAL A QUANTIDADE DE CHAPAS FALTANTES NO LOTE?"
-      ],
+<div class="section-container">
+  <div class="section-header">
+    <h2>Dados da reclamação</h2>
+    <div class="title-underline"></div>
+  </div>
 
-      "MANCHAS/IRISAÇÃO": [
-        "HÁ INDICIOS DE ESCORRIMENTO DE ÁGUA NAS PILHAS?",
-        "HOUVE BENEFICIAMENTO DOS LOTES RECLAMADOS? ( CORTE, LAVAGEM, LAPIDAÇÃO, ETC)",
-        "O MATERIAL ESTA SEGREGADO?",
-        "QUAL FOI A PERDA REAL?",
-        "TODAS AS CHAPAS APRESENTAM MANCHAS?"
-      ],
+  <div class="field">
+    <div class="field-title">Número(s) RO</div>
+    <div class="md-input">
+      <input type="text" id="numeroRo" placeholder="Digite o número da RO">
+    </div>
+  </div>
 
-      "RISCO": [
-        "É POSSÍVEL SENTIR O RISCO AO TOCAR?",
-        "ESTA DO LADO BANHO OU ATMOSFERA?",
-        "O RISCO É CONTÍNUO OU INTERMITENTE?",
-        "O RISCO FOI ENCONTRADO NO VIDRO BASE OU PRODUTO ACABADO?",
-        "PODERIA ENVIAR CROQUI?",
-        "QUAL É O SENTIDO DO RISCO?"
-      ],
+  <div class="field">
+    <div class="field-title">Quantidade total reclamada (m²)</div>
+    <div class="md-input">
+      <input type="number" step="0.01" id="qtdReclamada" placeholder="00,00">
+    </div>
+  </div>
 
-      "VIDRO MOLHADO": [
-        "FOI IDENTIFICADO ALGUMA AVARIA NA LONA DO CAMINHÃO?",
-        "O VIDRO SERÁ PROCESSADO RÁPIDO?",
-        "SE SIM, PODE NOS INFORMAR SE HOUVE PERDA PÓS PROCESSAMENTO?",
-        "TODAS AS CHAPAS APRESENTAM SINAIS DE MOLHADURA?"
-      ],
+  <div class="field">
+    <div class="field-title">Defeito reclamado<span class="required">*</span></div>
+    <div class="md-input">
+      <select id="defeitoReclamado">
+        <option value="" disabled selected hidden>Selecione</option>
+        <option>DEFEITOS PONTUAIS</option>
+        <option>DIFICULDADE DE CORTE</option>
+        <option>FALTA DE CHAPAS</option>
+        <option>MANCHAS/IRISAÇÃO</option>
+        <option>RISCO</option>
+        <option>VIDRO MOLHADO</option>
+        <option>DEFORMAÇÃO</option>
+        <option>EMPENAMENTO</option>
+        <option>DESLOCAMENTO DE CHAPAS</option>
+      </select>
+      <span class="md-arrow">▾</span>
+    </div>
+  </div>
 
-      "DEFORMAÇÃO": [
-        "NOS INFORMAR O ÂNGULO E DISTÂNCIA A QUAL É POSSÍVEL OBSERVAR AS DISTORÇÕES",
-        "A DISTORÇÃO FOI OBSERVADA NA MATÉRIA-PRIMA?",
-        "CLIENTE JÁ PROCESSOU TODO O MATERIAL NO QUAL REPORTA O DEFEITO?",
-        "TODAS AS CHAPAS DOS LOTES RECLAMADOS APRESENTARAM DISTORÇÕES? SEMPRE NA MESMA POSIÇÃO?",
-        "A POSIÇÃO EXATA DA DISTORÇÃO NA CHAPA (SE POSSÍVEL ENVIAR UM CROQUI ILUSTRANDO A POSIÇÃO DA DEFORMAÇÃO)",
-        "HOUVE ALGUM TIPO DE APROVEITAMENTO DAS PEÇAS QUE JÁ FORAM PROCESSADAS? SE SIM, QUAL A M² REAL DA PERDA?",
-        "EXISTE AINDA MATERIAL A SER PROCESSADO?"
-      ],
+  <div class="field">
+    <div class="field-title">Perguntas relacionadas ao defeito</div>
+    <div id="perguntasDefeito">
+      <div class="hint">Selecione um defeito para exibir as perguntas.</div>
+    </div>
+  </div>
 
-      "EMPENAMENTO": [
-        "FOI REALIZADA MEDIÇÃO DO EMPENAMENTO? QUAL VALOR ENCONTRADO?",
-        "MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²",
-        "TODAS AS CHAPAS APRESENTAM EMPENAMENTO?",
-        "O MATERIAL ESTÁ SEGREGADO?"
-      ],
+  <div class="field">
+    <div class="field-title">Observações</div>
+    <div class="md-input"><textarea id="obsReclamacao" rows="3"></textarea></div>
+    <input type="file" multiple>
+  </div>
 
-      "DESLOCAMENTO DE CHAPAS": [
-        "DESNÍVEL FOI OBSERVADO EM TODAS AS CHAPAS DA PILHA?",
-        "DESNÍVEL ENTRE AS CHAPAS FOI OBSERVADO EM TODAS AS EXTREMIDADES DA PILHA?",
-        "ENVIAR EVIDÊNCIAS DAS MEDIÇÕES ENCONTRADAS",
-        "MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²"
-      ]
-    };
+</div>
 
-    const selectDefeito = document.getElementById("defeitoReclamado");
-    const perguntasContainer = document.getElementById("perguntasDefeito");
+<!-- ÁREA 3 -->
+<div class="area-strip"><div class="area-title">Área 3</div></div>
 
-    selectDefeito.addEventListener("change", () => {
-      const defeito = selectDefeito.value;
-      const perguntas = perguntasPorDefeito[defeito] || [];
+<div class="section-container">
+  <div class="section-header">
+    <h2>Análise técnica</h2>
+    <div class="title-underline"></div>
+  </div>
 
-      if (!perguntas.length) {
-        perguntasContainer.innerHTML =
-          '<div class="hint">NÃO HÁ PERGUNTAS CONFIGURADAS PARA ESTE DEFEITO.</div>';
-        return;
-      }
+  <div class="field">
+    <div class="field-title">Comentários gerais referente ao atendimento</div>
+    <div class="md-input">
+      <textarea id="comentariosGerais" rows="3" placeholder="Descreva sua análise técnica aqui"></textarea>
+    </div>
+    <div class="attach-row">
+      <div class="attach-label">📎 ANEXAR ARQUIVO(S)</div><br>
+      <input type="file" id="anexoAnaliseTecnica" multiple>
+    </div>
+  </div>
 
-      let html = "";
-      perguntas.forEach((texto, index) => {
-        html += `
-          <div class="question-block">
-            <div class="question-text">${texto}</div>
-            <div class="md-input">
-              <textarea
-                rows="2"
-                id="resp_${defeito.replace(/\\s+/g,'_')}_${index}"
-                placeholder="Responda aqui"
-              ></textarea>
-            </div>
-          </div>
-        `;
-      });
+</div>
 
-      perguntasContainer.innerHTML = html;
-    });
-  </script>
+<script>
+const perguntasPorDefeito = {
+"DEFEITOS PONTUAIS": [
+"FOI ENCONTRADO ANTES OU DEPOIS DO PROCESSAMENTO?",
+"HOUVE APROVEITAMENTO DA CHAPA?",
+"O DEFEITO É VISTO EM TODAS AS CHAPAS?",
+"QUAL A QUANTIDADE DE DEFEITOS?",
+"QUAL FOI A PERCA REAL?",
+"TEM AMOSTRAS SEGREGADAS PARA ENVIO?"
+],
+"DIFICULDADE DE CORTE": [
+"A APLICAÇÃO DO OLEO DE CORTE ESTA NORMAL?",
+"A PRESSÃO DA FERRAMENTA FOI AJUSTADA?",
+"HÁ PRESENÇA DE PROBLEMAS NO DESTAQUE ( SERRILHADO, BICOS, TRINCAS, ETC)?",
+"MESA DE CORTE ESTÁ EM BOAS CONDIÇÕES?",
+"O MATERIAL ESTA SEGREGADO?",
+"QUAL A PRESSÃO UTILIZADA NO CORT?",
+"QUAL FOI A PERDA REAL?",
+"QUAL O ÂNGULO DO RODIZIO?",
+"QUANTO TEMPO É FEITO A TROCA DOS RODIZIOS DE CORTE?",
+"TODAS AS CHAPAS ESTÃO QUEBRANDO DURANTE O CORTE?"
+],
+"FALTA DE CHAPAS": [
+"A FALTA DA CHAPA FOI VISTA NO ATO DO DESCARREGAMENTO?",
+"POSSUI O RIE DA CARGA? GENTILEZA ENVIAR UMA CÓPIA.",
+"QUAL A QUANTIDADE DE CHAPAS FALTANTES NO LOTE?"
+],
+"MANCHAS/IRISAÇÃO": [
+"HÁ INDICIOS DE ESCORRIMENTO DE ÁGUA NAS PILHAS?",
+"HOUVE BENEFICIAMENTO DOS LOTES RECLAMADOS? ( CORTE, LAVAGEM, LAPIDAÇÃO, ETC)",
+"O MATERIAL ESTA SEGREGADO?",
+"QUAL FOI A PERDA REAL?",
+"TODAS AS CHAPAS APRESENTAM MANCHAS?"
+],
+"RISCO": [
+"É POSSÍVEL SENTIR O RISCO AO TOCAR?",
+"ESTA DO LADO BANHO OU ATMOSFERA?",
+"O RISCO É CONTÍNUO OU INTERMITENTE?",
+"O RISCO FOI ENCONTRADO NO VIDRO BASE OU PRODUTO ACABADO?",
+"PODERIA ENVIAR CROQUI?",
+"QUAL É O SENTIDO DO RISCO?"
+],
+"VIDRO MOLHADO": [
+"FOI IDENTIFICADO ALGUMA AVARIA NA LONA DO CAMINHÃO?",
+"O VIDRO SERÁ PROCESSADO RÁPIDO?",
+"SE SIM, PODE NOS INFORMAR SE HOUVE PERDA PÓS PROCESSAMENTO?",
+"TODAS AS CHAPAS APRESENTAM SINAIS DE MOLHADURA?"
+],
+"DEFORMAÇÃO": [
+"NOS INFORMAR O ÂNGULO E DISTÂNCIA A QUAL É POSSÍVEL OBSERVAR AS DISTORÇÕES",
+"A DISTORÇÃO FOI OBSERVADA NA MATÉRIA-PRIMA?",
+"CLIENTE JÁ PROCESSOU TODO O MATERIAL NO QUAL REPORTA O DEFEITO?",
+"TODAS AS CHAPAS DOS LOTES RECLAMADOS APRESENTARAM DISTORÇÕES? SEMPRE NA MESMA POSIÇÃO?",
+"A POSIÇÃO EXATA DA DISTORÇÃO NA CHAPA (SE POSSÍVEL ENVIAR UM CROQUI ILUSTRANDO A POSIÇÃO DA DEFORMAÇÃO)",
+"HOUVE ALGUM TIPO DE APROVEITAMENTO DAS PEÇAS QUE JÁ FORAM PROCESSADAS? SE SIM, QUAL A M² REAL DA PERDA?",
+"EXISTE AINDA MATERIAL A SER PROCESSADO?"
+],
+"EMPENAMENTO": [
+"FOI REALIZADA MEDIÇÃO DO EMPENAMENTO? QUAL VALOR ENCONTRADO?",
+"MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²",
+"TODAS AS CHAPAS APRESENTAM EMPENAMENTO?",
+"O MATERIAL ESTÁ SEGREGADO?"
+],
+"DESLOCAMENTO DE CHAPAS": [
+"DESNÍVEL FOI OBSERVADO EM TODAS AS CHAPAS DA PILHA?",
+"DESNÍVEL ENTRE AS CHAPAS FOI OBSERVADO EM TODAS AS EXTREMIDADES DA PILHA?",
+"ENVIAR EVIDÊNCIAS DAS MEDIÇÕES ENCONTRADAS",
+"MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²"
+]
+};
+
+document.getElementById("defeitoReclamado").addEventListener("change", function () {
+  const defeito = this.value;
+  const perguntas = perguntasPorDefeito[defeito] || [];
+  const container = document.getElementById("perguntasDefeito");
+
+  if (!perguntas.length) {
+    container.innerHTML = '<div class="hint">NÃO HÁ PERGUNTAS PARA ESTE ITEM.</div>';
+    return;
+  }
+
+  let html = "";
+  perguntas.forEach((p, i) => {
+    html += `
+      <div class="question-block">
+        <div class="question-text">${p}</div>
+        <div class="md-input">
+          <textarea rows="2" id="resp_${defeito.replace(/\\s+/g,'_')}_${i}" placeholder="Responda aqui"></textarea>
+        </div>
+      </div>`;
+  });
+
+  container.innerHTML = html;
+});
+</script>
 
 </body>
 </html>
