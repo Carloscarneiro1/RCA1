@@ -236,14 +236,13 @@ transition:.1s ease;
 <select id="defeitoReclamado">
 <option value="" disabled selected hidden>Selecione</option>
 <option>DEFEITOS PONTUAIS</option>
-<option>DIFICULDADE DE CORTE</option>
+<option>DIFICULDADE NO CORTE / EMPENAMENTO</option>
 <option>FALTA DE CHAPAS</option>
 <option>MANCHAS/IRISAÇÃO</option>
 <option>RISCO</option>
 <option>VIDRO MOLHADO</option>
-<option>DEFORMAÇÃO</option>
-<option>EMPENAMENTO</option>
 <option>DESLOCAMENTO DE CHAPAS</option>
+<option>PRODUTO ERRADO</option>
 </select>
 <span class="md-arrow">▾</span>
 </div>
@@ -251,9 +250,7 @@ transition:.1s ease;
 
 <div class="field">
 <div class="field-title">Perguntas relacionadas ao defeito</div>
-<div id="perguntasDefeito">
-<div style="font-size:12px;color:#666;">Selecione um defeito para exibir as perguntas.</div>
-</div>
+<div id="perguntasDefeito" style="font-size:12px;color:#666;">Selecione um defeito para exibir as perguntas.</div>
 </div>
 
 <div class="field">
@@ -291,9 +288,8 @@ transition:.1s ease;
 </div>
 </div>
 
-<!-- BOTÕES -->
 <div class="section-container">
-<div class="actions" style="text-align:right;">
+<div style="text-align:right;">
 <button class="btn btn-secondary">Registrar</button>
 <button class="btn btn-primary" onclick="gerarPDF()">Exportar PDF</button>
 </div>
@@ -314,7 +310,8 @@ const perguntas = {
 "QUAL FOI A PERCA REAL?",
 "TEM AMOSTRAS SEGREGADAS PARA ENVIO?"
 ],
-"DIFICULDADE DE CORTE":[
+
+"DIFICULDADE NO CORTE / EMPENAMENTO":[
 "A APLICAÇÃO DO ÓLEO DE CORTE ESTÁ NORMAL?",
 "A PRESSÃO DA FERRAMENTA FOI AJUSTADA?",
 "HÁ PROBLEMAS NO DESTAQUE?",
@@ -324,13 +321,19 @@ const perguntas = {
 "QUAL FOI A PERDA REAL?",
 "QUAL O ÂNGULO DO RODÍZIO?",
 "TEMPO DE TROCA DOS RODÍZIOS?",
-"TODAS AS CHAPAS QUEBRAM NO CORTE?"
+"TODAS AS CHAPAS QUEBRAM NO CORTE?",
+"FOI REALIZADA MEDIÇÃO DO EMPENAMENTO? VALOR?",
+"MATERIAL PROCESSADO? HOUVE PERDA? M²?",
+"TODAS AS CHAPAS COM EMPENAMENTO?",
+"O MATERIAL ESTÁ SEGREGADO?"
 ],
+
 "FALTA DE CHAPAS":[
 "A FALTA FOI VISTA NO DESCARREGAMENTO?",
 "POSSUI RIE? ENVIAR CÓPIA",
 "QUANTAS CHAPAS FALTAM?"
 ],
+
 "MANCHAS/IRISAÇÃO":[
 "INDÍCIO DE ÁGUA NAS PILHAS?",
 "HOUVE BENEFICIAMENTO DO LOTE?",
@@ -338,6 +341,7 @@ const perguntas = {
 "QUAL FOI A PERDA REAL?",
 "TODAS AS CHAPAS COM MANCHAS?"
 ],
+
 "RISCO":[
 "É POSSÍVEL SENTIR O RISCO?",
 "BANHO OU ATMOSFERA?",
@@ -346,28 +350,38 @@ const perguntas = {
 "CROQUI?",
 "SENTIDO DO RISCO?"
 ],
+
 "VIDRO MOLHADO":[
 "AVARIA NA LONA?",
 "PROCESSAMENTO RÁPIDO?",
 "HOUVE PERDA?",
 "TODAS AS CHAPAS MOLHADAS?"
-]
+],
+
+"DESLOCAMENTO DE CHAPAS":[
+"DESNÍVEL EM TODAS AS CHAPAS?",
+"DESNÍVEL NAS EXTREMIDADES?",
+"EVIDÊNCIAS DE MEDIÇÕES?",
+"MATERIAL PROCESSADO? PERDA M²?"
+],
+
+"PRODUTO ERRADO":[]
 };
 
 document.getElementById("defeitoReclamado").addEventListener("change",()=>{
-const defeito = document.getElementById("defeitoReclamado").value;
-const box = document.getElementById("perguntasDefeito");
+const defeito=document.getElementById("defeitoReclamado").value;
+const box=document.getElementById("perguntasDefeito");
 box.innerHTML="";
-perguntas[defeito]?.forEach(p=>{
-box.innerHTML+=`
+const lista=perguntas[defeito]||[];
+lista.length===0?box.innerHTML="<i style='font-size:12px;color:#777;'>Sem perguntas cadastradas</i>": 
+lista.forEach(p=>{box.innerHTML+=`
 <div class='field'>
 <div class='field-title'>${p}</div>
 <div class='md-input'><textarea rows='2'></textarea></div>
-</div>`;
-});
+</div>`});
 });
 
-// PREVIEW + EXCLUSÃO
+// PREVIEW + EXCLUIR
 function setupPreview(inputId, previewId){
 const input=document.getElementById(inputId);
 const preview=document.getElementById(previewId);
@@ -386,11 +400,8 @@ img.src=e.target.result;
 
 const del=document.createElement("div");
 del.className="delete-btn";
-del.innerText="✕";
-del.onclick=()=>{
-imagens.splice(i,1);
-render();
-};
+del.innerText="×";
+del.onclick=()=>{imagens.splice(i,1);render();};
 
 div.appendChild(img);
 div.appendChild(del);
@@ -415,17 +426,15 @@ setupPreview("anexoAnaliseTecnica","previewAnaliseTecnica");
 
 // PDF
 async function gerarPDF(){
-const {jsPDF}=window.jspdf;
+const{jsPDF}=window.jspdf;
 const area=document.getElementById("rac-container");
 const canvas=await html2canvas(area,{scale:2});
 const img=canvas.toDataURL("image/png");
-
 const pdf=new jsPDF("p","pt","a4");
 const pageW=pdf.internal.pageSize.getWidth();
 const pageH=pdf.internal.pageSize.getHeight();
-const imgH=canvas.height * pageW / canvas.width;
-let pos=0, left=imgH;
-
+const imgH=canvas.height*pageW/canvas.width;
+let pos=0,left=imgH;
 pdf.addImage(img,"PNG",0,pos,pageW,imgH);
 left-=pageH;
 while(left>0){
