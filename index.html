@@ -18,6 +18,7 @@
       color: #1f2933;
     }
 
+    /* CABEÇALHO GERAL */
     header {
       width: 100%;
       background: #0d47a1;
@@ -29,6 +30,7 @@
       letter-spacing: 0.5px;
     }
 
+    /* BARRA "ÁREA" */
     .area-strip {
       background: #0d47a1;
       padding: 0 16px;
@@ -44,6 +46,7 @@
       font-weight: bold;
     }
 
+    /* CAIXA PRINCIPAL DOS CAMPOS */
     .section-container {
       max-width: 960px;
       margin: 0 auto 24px;
@@ -69,10 +72,11 @@
       width: 80px;
       height: 3px;
       border-radius: 999px;
-      background: #ff7f00;
+      background: #f97316; /* laranja */
       margin-top: 6px;
     }
 
+    /* CAMPOS ESTILO MATERIAL */
     .field {
       margin-bottom: 22px;
     }
@@ -81,6 +85,7 @@
       font-size: 14px;
       margin-bottom: 4px;
       color: #374151;
+      font-weight: 600;
     }
 
     .required {
@@ -97,6 +102,7 @@
       border-radius: 8px;
       border: 1px solid #d1d5db;
       padding: 10px 12px 6px;
+      transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
 
     .md-input input,
@@ -111,232 +117,338 @@
       color: #111827;
     }
 
+    .md-input textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .md-input:focus-within {
+      background: #ffffff;
+      border-color: #1976d2;
+      box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.22);
+    }
+
     .md-arrow {
       position: absolute;
       right: 12px;
       top: 50%;
       transform: translateY(-50%);
       font-size: 14px;
-      pointer-events: none;
       color: #757575;
+      pointer-events: none;
     }
 
-    .questions-list {
-      background: #fffaf3;
-      border-left: 4px solid #ff7f00;
-      padding: 16px;
-      border-radius: 6px;
-      list-style: square;
-      font-size: 14px;
-      margin-top: 12px;
+    .hint {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 2px;
     }
 
-    .questions-list li {
-      margin-bottom: 6px;
-      font-weight: bold;
+    .attach-row {
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
+    .attach-label {
+      display: inline-block;
+      margin-bottom: 2px;
+      font-size: 12px;
+      color: #374151;
+      font-weight: 500;
+    }
+
+    /* PERGUNTAS DINÂMICAS */
+    .question-block {
+      margin-bottom: 16px;
+    }
+
+    .question-text {
+      font-size: 13px;
+      font-weight: 600;
       text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .section-container {
+        margin: 0 8px 16px;
+        padding: 20px 16px 24px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<header>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</header>
+  <header>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</header>
 
-<!-- ÁREA 1 -->
-<div class="area-strip">
-  <div class="area-title">Área 1</div>
-</div>
-
-<div class="section-container">
-  <div class="section-header">
-    <h2>Dados gerais</h2>
-    <div class="title-underline"></div>
+  <!-- ÁREA 1 -->
+  <div class="area-strip">
+    <div class="area-title">Área 1</div>
   </div>
 
-  <div class="field">
-    <div class="field-title">Data da visita<span class="required">*</span></div>
-    <div class="md-input">
-      <input type="date" id="dataVisita">
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Dados gerais</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <!-- DATA DA VISITA -->
+    <div class="field">
+      <div class="field-title">
+        Data da visita<span class="required">*</span>
+      </div>
+      <div class="md-input">
+        <input type="date" id="dataVisita">
+      </div>
+      <div class="hint">Clique no campo para abrir o calendário.</div>
+    </div>
+
+    <!-- NOME DO ANALISTA -->
+    <div class="field">
+      <div class="field-title">
+        Nome do analista de atendimento<span class="required">*</span>
+      </div>
+      <div class="md-input">
+        <input
+          id="analista"
+          list="listaAnalistas"
+          placeholder="Digite para pesquisar"
+        >
+        <datalist id="listaAnalistas">
+          <option value="Leandro Nogueira"></option>
+          <option value="Mayara Rodrigues"></option>
+          <option value="Celso Penteado"></option>
+          <option value="Carlos Carneiro"></option>
+        </datalist>
+        <span class="md-arrow">▾</span>
+      </div>
+      <div class="hint">Comece a digitar o nome e escolha na lista.</div>
+    </div>
+
+    <!-- NOME DO CLIENTE -->
+    <div class="field">
+      <div class="field-title">Nome do cliente</div>
+      <div class="md-input">
+        <input
+          type="text"
+          id="nomeCliente"
+          placeholder="Digite o nome do cliente"
+        >
+      </div>
+    </div>
+
+    <!-- CIDADE / ESTADO -->
+    <div class="field">
+      <div class="field-title">Cidade / Estado</div>
+      <div class="md-input">
+        <input
+          type="text"
+          id="cidadeEstado"
+          placeholder="Ex.: Jacareí / SP"
+        >
+      </div>
     </div>
   </div>
 
-  <div class="field">
-    <div class="field-title">Nome do analista de atendimento<span class="required">*</span></div>
-    <div class="md-input">
-      <input id="analista" list="listaAnalistas" placeholder="Digite para pesquisar">
-      <datalist id="listaAnalistas">
-        <option value="Leandro Nogueira"></option>
-        <option value="Mayara Rodrigues"></option>
-        <option value="Celso Penteado"></option>
-        <option value="Carlos Carneiro"></option>
-      </datalist>
-      <span class="md-arrow">▾</span>
+  <!-- ÁREA 2 -->
+  <div class="area-strip">
+    <div class="area-title">Área 2</div>
+  </div>
+
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Dados da reclamação</h2>
+      <div class="title-underline"></div>
     </div>
-  </div>
 
-  <div class="field">
-    <div class="field-title">Nome do cliente</div>
-    <div class="md-input">
-      <input type="text" id="nomeCliente" placeholder="Digite o nome do cliente">
+    <!-- NÚMERO(S) RO -->
+    <div class="field">
+      <div class="field-title">Número(s) RO</div>
+      <div class="md-input">
+        <input
+          type="text"
+          id="numeroRo"
+          placeholder="Digite o número da RO"
+        >
+      </div>
     </div>
-  </div>
 
-  <div class="field">
-    <div class="field-title">Cidade / Estado</div>
-    <div class="md-input">
-      <input type="text" id="cidadeEstado" placeholder="Ex.: Jacareí / SP">
+    <!-- QUANTIDADE TOTAL RECLAMADA -->
+    <div class="field">
+      <div class="field-title">Quantidade total reclamada (m²)</div>
+      <div class="md-input">
+        <input
+          type="number"
+          step="0.01"
+          min="0"
+          id="qtdReclamada"
+          placeholder="00,00"
+        >
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- ÁREA 2 -->
-<div class="area-strip">
-  <div class="area-title">Área 2</div>
-</div>
-
-<div class="section-container">
-  <div class="section-header">
-    <h2>Dados da reclamação</h2>
-    <div class="title-underline"></div>
-  </div>
-
-  <div class="field">
-    <div class="field-title">Número(s) RO</div>
-    <div class="md-input">
-      <input type="text" id="numeroRo" placeholder="Digite o número da RO">
+    <!-- DEFEITO RECLAMADO -->
+    <div class="field">
+      <div class="field-title">
+        Defeito reclamado<span class="required">*</span>
+      </div>
+      <div class="md-input">
+        <select id="defeitoReclamado" required>
+          <option value="" disabled selected hidden>Selecione</option>
+          <option>DEFEITOS PONTUAIS</option>
+          <option>DIFICULDADE DE CORTE</option>
+          <option>FALTA DE CHAPAS</option>
+          <option>MANCHAS/IRISAÇÃO</option>
+          <option>RISCO</option>
+          <option>VIDRO MOLHADO</option>
+          <option>DEFORMAÇÃO</option>
+          <option>EMPENAMENTO</option>
+          <option>DESLOCAMENTO DE CHAPAS</option>
+        </select>
+        <span class="md-arrow">▾</span>
+      </div>
     </div>
-  </div>
 
-  <div class="field">
-    <div class="field-title">Quantidade total reclamada (m²)</div>
-    <div class="md-input">
-      <input type="number" step="0.01" min="0" id="qtdReclamada" placeholder="00,00">
+    <!-- PERGUNTAS RELACIONADAS AO DEFEITO -->
+    <div class="field">
+      <div class="field-title">Perguntas relacionadas ao defeito</div>
+      <div id="perguntasDefeito">
+        <div class="hint">Selecione um defeito para exibir as perguntas.</div>
+      </div>
     </div>
-  </div>
 
-  <div class="field">
-    <div class="field-title">Defeito reclamado<span class="required">*</span></div>
-    <div class="md-input">
-      <select id="defeitoReclamado" required>
-        <option value="" disabled selected hidden>Selecione</option>
-        <option>DEFEITOS PONTUAIS</option>
-        <option>DIFICULDADE DE CORTE</option>
-        <option>FALTA DE CHAPAS</option>
-        <option>MANCHAS/IRISAÇÃO</option>
-        <option>RISCO</option>
-        <option>VIDRO MOLHADO</option>
-        <option>DEFORMAÇÃO</option>
-        <option>EMPENAMENTO</option>
-        <option>DESLOCAMENTO DE CHAPAS</option>
-      </select>
-      <span class="md-arrow">▾</span>
+    <!-- OBSERVAÇÕES GERAIS -->
+    <div class="field">
+      <div class="field-title">Observações</div>
+      <div class="md-input">
+        <textarea
+          id="obsReclamacao"
+          rows="3"
+          placeholder="Digite aqui as observações"
+        ></textarea>
+      </div>
+      <div class="attach-row">
+        <div class="attach-label">📎 ANEXAR ARQUIVO(S)</div><br>
+        <input type="file" id="anexoObs" multiple>
+      </div>
     </div>
+
   </div>
 
-  <!-- Aqui as perguntas aparecerão -->
-  <div id="perguntasDefeito"></div>
+  <!-- SCRIPT DA ÁRVORE DE PERGUNTAS -->
+  <script>
+    // Banco de perguntas por defeito (tudo em MAIÚSCULO)
+    const perguntasPorDefeito = {
+      "DEFEITOS PONTUAIS": [
+        "FOI ENCONTRADO ANTES OU DEPOIS DO PROCESSAMENTO?",
+        "HOUVE APROVEITAMENTO DA CHAPA?",
+        "O DEFEITO É VISTO EM TODAS AS CHAPAS?",
+        "QUAL A QUANTIDADE DE DEFEITOS?",
+        "QUAL FOI A PERCA REAL?",
+        "TEM AMOSTRAS SEGREGADAS PARA ENVIO?"
+      ],
 
-  <div class="field">
-    <div class="field-title">Observações</div>
-    <div class="md-input">
-      <textarea id="obsReclamacao" rows="3" placeholder="Digite aqui as observações"></textarea>
-    </div>
-    <input type="file" multiple>
-  </div>
+      "DIFICULDADE DE CORTE": [
+        "A APLICAÇÃO DO OLEO DE CORTE ESTA NORMAL?",
+        "A PRESSÃO DA FERRAMENTA FOI AJUSTADA?",
+        "HÁ PRESENÇA DE PROBLEMAS NO DESTAQUE ( SERRILHADO, BICOS, TRINCAS, ETC)?",
+        "MESA DE CORTE ESTÁ EM BOAS CONDIÇÕES?",
+        "O MATERIAL ESTA SEGREGADO?",
+        "QUAL A PRESSÃO UTILIZADA NO CORT?",
+        "QUAL FOI A PERDA REAL?",
+        "QUAL O ÂNGULO DO RODIZIO?",
+        "QUANTO TEMPO É FEITO A TROCA DOS RODIZIOS DE CORTE?",
+        "TODAS AS CHAPAS ESTÃO QUEBRANDO DURANTE O CORTE?"
+      ],
 
-</div>
+      "FALTA DE CHAPAS": [
+        "A FALTA DA CHAPA FOI VISTA NO ATO DO DESCARREGAMENTO?",
+        "POSSUI O RIE DA CARGA? GENTILEZA ENVIAR UMA CÓPIA.",
+        "QUAL A QUANTIDADE DE CHAPAS FALTANTES NO LOTE?"
+      ],
 
+      "MANCHAS/IRISAÇÃO": [
+        "HÁ INDICIOS DE ESCORRIMENTO DE ÁGUA NAS PILHAS?",
+        "HOUVE BENEFICIAMENTO DOS LOTES RECLAMADOS? ( CORTE, LAVAGEM, LAPIDAÇÃO, ETC)",
+        "O MATERIAL ESTA SEGREGADO?",
+        "QUAL FOI A PERDA REAL?",
+        "TODAS AS CHAPAS APRESENTAM MANCHAS?"
+      ],
 
-<!-- SCRIPT DINÂMICO DE PERGUNTAS -->
-<script>
-const perguntasPorDefeito = {
-"DEFEITOS PONTUAIS": [
-"FOI ENCONTRADO ANTES OU DEPOIS DO PROCESSAMENTO?",
-"HOUVE APROVEITAMENTO DA CHAPA?",
-"O DEFEITO É VISTO EM TODAS AS CHAPAS?",
-"QUAL A QUANTIDADE DE DEFEITOS?",
-"QUAL FOI A PERCA REAL?",
-"TEM AMOSTRAS SEGREGADAS PARA ENVIO?"
-],
-"DIFICULDADE DE CORTE": [
-"A APLICAÇÃO DO OLEO DE CORTE ESTA NORMAL?",
-"A PRESSÃO DA FERRAMENTA FOI AJUSTADA?",
-"HÁ PRESENÇA DE PROBLEMAS NO DESTAQUE ( SERRILHADO, BICOS, TRINCAS, ETC)?",
-"MESA DE CORTE ESTÁ EM BOAS CONDIÇÕES?",
-"O MATERIAL ESTA SEGREGADO?",
-"QUAL A PRESSÃO UTILIZADA NO CORT?",
-"QUAL FOI A PERDA REAL?",
-"QUAL O ÂNGULO DO RODIZIO?",
-"QUANTO TEMPO É FEITO A TROCA DOS RODIZIOS DE CORTE?",
-"TODAS AS CHAPAS ESTÃO QUEBRANDO DURANTE O CORTE?"
-],
-"FALTA DE CHAPAS": [
-"A FALTA DA CHAPA FOI VISTA NO ATO DO DESCARREGAMENTO?",
-"POSSUI O RIE DA CARGA? GENTILEZA ENVIAR UMA CÓPIA.",
-"QUAL A QUANTIDADE DE CHAPAS FALTANTES NO LOTE?"
-],
-"MANCHAS/IRISAÇÃO": [
-"HÁ INDICIOS DE ESCORRIMENTO DE ÁGUA NAS PILHAS?",
-"HOUVE BENEFICIAMENTO DOS LOTES RECLAMADOS? ( CORTE, LAVAGEM, LAPIDAÇÃO, ETC)",
-"O MATERIAL ESTA SEGREGADO?",
-"QUAL FOI A PERDA REAL?",
-"TODAS AS CHAPAS APRESENTAM MANCHAS?"
-],
-"RISCO": [
-"É POSSÍVEL SENTIR O RISCO AO TOCAR?",
-"ESTA DO LADO BANHO OU ATMOSFERA?",
-"O RISCO É CONTÍNUO OU INTERMITENTE?",
-"RISCO FOI ENCONTRADO NO VIDRO BASE OU PRODUTO ACABADO?",
-"PODERIA ENVIAR CROQUI?",
-"QUAL É O SENTIDO DO RISCO?"
-],
-"VIDRO MOLHADO": [
-"FOI IDENTIFICADO ALGUMA AVARIA NA LONA DO CAMINHÃO?",
-"O VIDRO SERÁ PROCESSADO RÁPIDO?",
-"SE SIM, PODE NOS INFORMAR SE HOUVE PERDA PÓS PROCESSAMENTO?",
-"TODAS AS CHAPAS APRESENTAM SINAIS DE MOLHADURA?"
-],
-"DEFORMAÇÃO": [
-"NOS INFORMAR O ÂNGULO E DISTÂNCIA A QUAL É POSSÍVEL OBSERVAR AS DISTORÇÕES",
-"A DISTORÇÃO FOI OBSERVADA NA MATÉRIA-PRIMA?",
-"CLIENTE JÁ PROCESSOU TODO O MATERIAL NO QUAL REPORTA O DEFEITO?",
-"TODAS AS CHAPAS DOS LOTES RECLAMADOS APRESENTARAM DISTORÇÕES? SEMPRE NA MESMA POSIÇÃO?",
-"A POSIÇÃO EXATA DA DISTORÇÃO NA CHAPA (SE POSSÍVEL ENVIAR UM CROQUI ILUSTRANDO A POSIÇÃO DA DEFORMAÇÃO)",
-"HOUVE ALGUM TIPO DE APROVEITAMENTO DAS PEÇAS QUE JÁ FORAM PROCESSADAS? SE SIM, QUAL A M² REAL DA PERDA?",
-"EXISTE AINDA MATERIAL A SER PROCESSADO?"
-],
-"EMPENAMENTO": [
-"FOI REALIZADA MEDIÇÃO DO EMPENAMENTO? QUAL VALOR ENCONTRADO?",
-"MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²",
-"TODAS AS CHAPAS APRESENTAM EMPENAMENTO?",
-"O MATERIAL ESTÁ SEGREGADO?"
-],
-"DESLOCAMENTO DE CHAPAS": [
-"DESNÍVEL FOI OBSERVADO EM TODAS AS CHAPAS DA PILHA?",
-"DESNÍVEL ENTRE AS CHAPAS FOI OBSERVADO EM TODAS AS EXTREMIDADES DA PILHA?",
-"ENVIAR EVIDÊNCIAS DAS MEDIÇÕES ENCONTRADAS",
-"MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²"
-]
-};
+      "RISCO": [
+        "É POSSÍVEL SENTIR O RISCO AO TOCAR?",
+        "ESTA DO LADO BANHO OU ATMOSFERA?",
+        "O RISCO É CONTÍNUO OU INTERMITENTE?",
+        "O RISCO FOI ENCONTRADO NO VIDRO BASE OU PRODUTO ACABADO?",
+        "PODERIA ENVIAR CROQUI?",
+        "QUAL É O SENTIDO DO RISCO?"
+      ],
 
-document.getElementById("defeitoReclamado").addEventListener("change", function() {
-  const defeito = this.value;
-  const perguntas = perguntasPorDefeito[defeito] || [];
-  const container = document.getElementById("perguntasDefeito");
+      "VIDRO MOLHADO": [
+        "FOI IDENTIFICADO ALGUMA AVARIA NA LONA DO CAMINHÃO?",
+        "O VIDRO SERÁ PROCESSADO RÁPIDO?",
+        "SE SIM, PODE NOS INFORMAR SE HOUVE PERDA PÓS PROCESSAMENTO?",
+        "TODAS AS CHAPAS APRESENTAM SINAIS DE MOLHADURA?"
+      ],
 
-  if (perguntas.length === 0) {
-    container.innerHTML = "";
-    return;
-  }
+      "DEFORMAÇÃO": [
+        "NOS INFORMAR O ÂNGULO E DISTÂNCIA A QUAL É POSSÍVEL OBSERVAR AS DISTORÇÕES",
+        "A DISTORÇÃO FOI OBSERVADA NA MATÉRIA-PRIMA?",
+        "CLIENTE JÁ PROCESSOU TODO O MATERIAL NO QUAL REPORTA O DEFEITO?",
+        "TODAS AS CHAPAS DOS LOTES RECLAMADOS APRESENTARAM DISTORÇÕES? SEMPRE NA MESMA POSIÇÃO?",
+        "A POSIÇÃO EXATA DA DISTORÇÃO NA CHAPA (SE POSSÍVEL ENVIAR UM CROQUI ILUSTRANDO A POSIÇÃO DA DEFORMAÇÃO)",
+        "HOUVE ALGUM TIPO DE APROVEITAMENTO DAS PEÇAS QUE JÁ FORAM PROCESSADAS? SE SIM, QUAL A M² REAL DA PERDA?",
+        "EXISTE AINDA MATERIAL A SER PROCESSADO?"
+      ],
 
-  let html = "<ul class='questions-list'>";
-  perguntas.forEach(p => html += `<li>${p}</li>`);
-  html += "</ul>";
+      "EMPENAMENTO": [
+        "FOI REALIZADA MEDIÇÃO DO EMPENAMENTO? QUAL VALOR ENCONTRADO?",
+        "MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²",
+        "TODAS AS CHAPAS APRESENTAM EMPENAMENTO?",
+        "O MATERIAL ESTÁ SEGREGADO?"
+      ],
 
-  container.innerHTML = html;
-});
-</script>
+      "DESLOCAMENTO DE CHAPAS": [
+        "DESNÍVEL FOI OBSERVADO EM TODAS AS CHAPAS DA PILHA?",
+        "DESNÍVEL ENTRE AS CHAPAS FOI OBSERVADO EM TODAS AS EXTREMIDADES DA PILHA?",
+        "ENVIAR EVIDÊNCIAS DAS MEDIÇÕES ENCONTRADAS",
+        "MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²"
+      ]
+    };
+
+    const selectDefeito = document.getElementById("defeitoReclamado");
+    const perguntasContainer = document.getElementById("perguntasDefeito");
+
+    selectDefeito.addEventListener("change", () => {
+      const defeito = selectDefeito.value;
+      const perguntas = perguntasPorDefeito[defeito] || [];
+
+      if (!perguntas.length) {
+        perguntasContainer.innerHTML =
+          '<div class="hint">NÃO HÁ PERGUNTAS CONFIGURADAS PARA ESTE DEFEITO.</div>';
+        return;
+      }
+
+      let html = "";
+      perguntas.forEach((texto, index) => {
+        html += `
+          <div class="question-block">
+            <div class="question-text">${texto}</div>
+            <div class="md-input">
+              <textarea
+                rows="2"
+                id="resp_${defeito.replace(/\\s+/g,'_')}_${index}"
+                placeholder="Responda aqui"
+              ></textarea>
+            </div>
+          </div>
+        `;
+      });
+
+      perguntasContainer.innerHTML = html;
+    });
+  </script>
 
 </body>
 </html>
