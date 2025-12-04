@@ -1,377 +1,495 @@
 <!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</title>
 
-<style>
-* { box-sizing: border-box; }
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f3f4f6;
-  color: #1f2933;
-}
+  <style>
+    * { box-sizing: border-box; }
 
-/* CABEÇALHO */
-header {
-  width: 100%;
-  background: #f97316;
-  color: #ffffff;
-  padding: 18px 0;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f3f4f6;
+      color: #1f2933;
+    }
 
-/* ÁREA */
-.area-strip { background: #f97316; padding: 0 16px; }
-.area-title {
-  background: #f97316;
-  color: #ffffff;
-  padding: 12px 24px;
-  font-size: 16px;
-  border-bottom-right-radius: 22px;
-  display: inline-block;
-  font-weight: bold;
-}
+    header {
+      width: 100%;
+      background: #f97316;
+      color: #ffffff;
+      padding: 18px 0;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
 
-/* CONTAINER DAS SEÇÕES */
-.section-container {
-  max-width: 960px;
-  margin: 0 auto 24px;
-  background: #ffffff;
-  padding: 24px 32px 32px;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  border-top: 1px solid #e5e7eb;
-}
+    .area-strip {
+      background: #f97316;
+      padding: 0 16px;
+    }
 
-.section-header h2 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 600;
-  color: #1f2933;
-}
-.title-underline {
-  width: 80px;
-  height: 3px;
-  border-radius: 999px;
-  background: #f97316;
-  margin-top: 6px;
-}
+    .area-title {
+      background: #f97316;
+      color: #ffffff;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-bottom-right-radius: 22px;
+      display: inline-block;
+      font-weight: bold;
+    }
 
-/* CAMPOS */
-.field { margin-bottom: 22px; }
-.field-title { font-size: 14px; margin-bottom: 4px; color: #374151; }
-.required { color: red; font-weight: bold; margin-left: 4px; }
+    .section-container {
+      max-width: 960px;
+      margin: 0 auto 24px;
+      background: #ffffff;
+      padding: 24px 32px 32px;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      border-top: 1px solid #e5e7eb;
+    }
 
-.md-input {
-  position: relative;
-  display: flex;
-  align-items: center;
-  background: #f5f5f5;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  padding: 10px 12px;
-}
-.md-input input,
-.md-input textarea,
-.md-input select {
-  width: 100%;
-  border: none;
-  background: transparent;
-  outline: none;
-  font-size: 14px;
-}
+    .section-header { margin-bottom: 22px; }
 
-/* TEXTAREA */
-.md-textarea textarea { resize: vertical; min-height: 80px; }
+    .section-header h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: #1f2933;
+    }
 
-/* PREVIEW IMAGENS */
-.preview-container {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.preview-item {
-  position: relative;
-  width: 90px;
-  height: 90px;
-}
-.preview-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 2px solid #f97316;
-}
-.delete-btn {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background: #e53935;
-  padding: 3px 6px;
-  border-radius: 50%;
-  font-size: 11px;
-  cursor: pointer;
-  color: #fff;
-}
+    .title-underline {
+      width: 80px;
+      height: 3px;
+      border-radius: 999px;
+      background: #f97316;
+      margin-top: 6px;
+    }
 
-/* BOTÕES */
-.buttons {
-  text-align: center;
-  margin: 30px 0;
-}
-.btn {
-  background: #f97316;
-  color: #fff;
-  padding: 12px 26px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  border: none;
-  margin: 6px;
-}
-.btn:hover { background: #d85f10; }
-</style>
+    .field { margin-bottom: 22px; }
+    .field-title {
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: #374151;
+      font-weight: 600;
+    }
+    .required { color: #e53935; font-weight: bold; margin-left: 2px; }
+
+    .md-input {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: #f5f5f5;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      padding: 10px 12px 6px;
+    }
+
+    .md-input input,
+    .md-input textarea,
+    .md-input select {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      padding: 10px 0 4px;
+      font-size: 14px;
+      color: #111827;
+    }
+
+    .md-input textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .md-arrow {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: #757575;
+      pointer-events: none;
+    }
+
+    .attach-row { margin-top: 6px; font-size: 12px; }
+    .attach-label {
+      display: inline-block;
+      margin-bottom: 2px;
+      font-size: 12px;
+      color: #374151;
+      font-weight: 500;
+    }
+
+    .question-block { margin-bottom: 16px; }
+    .question-text {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .preview-container {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .preview-img {
+      max-width: 150px;
+      max-height: 150px;
+      border-radius: 4px;
+      border: 1px solid #d1d5db;
+      object-fit: cover;
+    }
+
+    .preview-file {
+      font-size: 12px;
+      padding: 4px 8px;
+      background: #f3f4f6;
+      border-radius: 4px;
+      border: 1px dashed #d1d5db;
+    }
+
+    .actions {
+      text-align: right;
+      margin-top: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 8px;
+      transition: .1s ease;
+    }
+
+    .btn-primary { background: #f97316; color: #fff; }
+    .btn-secondary { background: #e5e7eb; color: #111827; }
+
+    @media (max-width: 768px) {
+      .section-container {
+        margin: 0 8px 16px;
+        padding: 20px 16px 24px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<header>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</header>
 
-<!-- ÁREA 1 -->
-<div class="area-strip"><div class="area-title">Área 1</div></div>
-<div class="section-container">
-<div class="section-header">
-  <h2>Dados gerais</h2>
-  <div class="title-underline"></div>
-</div>
+<div id="rac-container">
+  <header>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</header>
 
-<div class="field">
-  <div class="field-title">Data da visita<span class="required">*</span></div>
-  <div class="md-input"><input type="date" id="dataVisita"></div>
-</div>
+  <!-- ÁREA 1 -->
+  <div class="area-strip"><div class="area-title">Área 1</div></div>
 
-<div class="field">
-  <div class="field-title">Nome do analista<span class="required">*</span></div>
-  <div class="md-input">
-    <input id="analista" list="listaAnalistas" placeholder="Digite para pesquisar">
-    <datalist id="listaAnalistas">
-      <option value="Leandro Nogueira"></option>
-      <option value="Mayara Rodrigues"></option>
-      <option value="Celso Penteado"></option>
-      <option value="Carlos Carneiro"></option>
-    </datalist>
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Dados gerais</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Data da visita<span class="required">*</span></div>
+      <div class="md-input">
+        <input type="date" id="dataVisita">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Nome do analista<span class="required">*</span></div>
+      <div class="md-input">
+        <input id="analista" list="listaAnalistas" placeholder="Digite para pesquisar">
+        <datalist id="listaAnalistas">
+          <option value="Leandro Nogueira"></option>
+          <option value="Mayara Rodrigues"></option>
+          <option value="Celso Penteado"></option>
+          <option value="Carlos Carneiro"></option>
+        </datalist>
+        <span class="md-arrow">▾</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Nome do cliente</div>
+      <div class="md-input">
+        <input type="text" id="nomeCliente" placeholder="Digite o nome do cliente">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Cidade / Estado</div>
+      <div class="md-input">
+        <input type="text" id="cidadeEstado" placeholder="Ex.: Jacareí / SP">
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="field">
-  <div class="field-title">Cliente</div>
-  <div class="md-input"><input type="text" id="cliente"></div>
-</div>
+  <!-- ÁREA 2 -->
+  <div class="area-strip"><div class="area-title">Área 2</div></div>
 
-<div class="field">
-  <div class="field-title">Cidade / Estado</div>
-  <div class="md-input"><input type="text" id="cidadeEstado"></div>
-</div>
-</div>
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Dados da reclamação</h2>
+      <div class="title-underline"></div>
+    </div>
 
-<!-- ÁREA 2 -->
-<div class="area-strip"><div class="area-title">Área 2</div></div>
-<div class="section-container">
-<div class="section-header">
-  <h2>Dados da reclamação</h2>
-  <div class="title-underline"></div>
-</div>
+    <div class="field">
+      <div class="field-title">Número(s) RO</div>
+      <div class="md-input">
+        <input type="text" id="numeroRo" placeholder="Digite o número da RO">
+      </div>
+    </div>
 
-<div class="field">
-  <div class="field-title">Número(s) RO</div>
-  <div class="md-input"><input id="numeroRo"></div>
-</div>
+    <div class="field">
+      <div class="field-title">Quantidade total reclamada (m²)</div>
+      <div class="md-input">
+        <input type="number" step="0.01" id="qtdReclamada" placeholder="00,00">
+      </div>
+    </div>
 
-<div class="field">
-  <div class="field-title">Quantidade reclamada (m²)</div>
-  <div class="md-input"><input type="number" step="0.01" id="qtdReclamada"></div>
-</div>
+    <div class="field">
+      <div class="field-title">Defeito reclamado<span class="required">*</span></div>
+      <div class="md-input">
+        <select id="defeitoReclamado">
+          <option value="" disabled selected hidden>Selecione</option>
+          <option>DEFEITOS PONTUAIS</option>
+          <option>DIFICULDADE DE CORTE</option>
+          <option>FALTA DE CHAPAS</option>
+          <option>MANCHAS/IRISAÇÃO</option>
+          <option>RISCO</option>
+          <option>VIDRO MOLHADO</option>
+          <option>DEFORMAÇÃO</option>
+          <option>EMPENAMENTO</option>
+          <option>DESLOCAMENTO DE CHAPAS</option>
+        </select>
+        <span class="md-arrow">▾</span>
+      </div>
+    </div>
 
-<div class="field">
-  <div class="field-title">Defeito reclamado<span class="required">*</span></div>
-  <div class="md-input">
-    <select id="defeito">
-      <option hidden disabled selected>Selecione</option>
-      <option>DEFEITOS PONTUAIS</option>
-      <option>DIFICULDADE DE CORTE</option>
-      <option>FALTA DE CHAPAS</option>
-      <option>MANCHAS/IRISAÇÃO</option>
-      <option>RISCO</option>
-      <option>VIDRO MOLHADO</option>
-    </select>
+    <div class="field">
+      <div class="field-title">Perguntas relacionadas ao defeito</div>
+      <div id="perguntasDefeito">
+        <div class="hint">Selecione um defeito para exibir as perguntas.</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Observações</div>
+      <div class="md-input">
+        <textarea id="obsReclamacao" rows="3"></textarea>
+      </div>
+      <div class="attach-row">
+        <div class="attach-label">📎 ANEXAR ARQUIVO(S) (ATÉ 10)</div><br>
+        <input type="file" id="anexoObs" multiple accept="image/*">
+      </div>
+      <div id="previewObs" class="preview-container"></div>
+    </div>
   </div>
+
+  <!-- ÁREA 3 -->
+  <div class="area-strip"><div class="area-title">Área 3</div></div>
+
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Análise técnica</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Comentários gerais referente ao atendimento</div>
+      <div class="md-input">
+        <textarea id="comentariosGerais" rows="3"
+        placeholder="Descreva sua análise técnica aqui"></textarea>
+      </div>
+      <div class="attach-row">
+        <div class="attach-label">📎 ANEXAR ARQUIVO(S) (ATÉ 10)</div><br>
+        <input type="file" id="anexoAnaliseTecnica" multiple accept="image/*">
+      </div>
+      <div id="previewAnaliseTecnica" class="preview-container"></div>
+    </div>
+  </div>
+
+  <!-- ÁREA DE AÇÕES -->
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Ações</h2>
+      <div class="title-underline"></div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn btn-secondary">Registrar</button>
+      <button type="button" class="btn btn-primary" onclick="gerarPDF()">Exportar em PDF</button>
+    </div>
+  </div>
+
 </div>
 
-<div id="perguntas"></div>
-
-<!-- Anexar evidências -->
-<div class="field">
-<div class="field-title">Evidências</div>
-<input type="file" id="fotos" multiple accept="image/*">
-<div class="preview-container" id="preview"></div>
-</div>
-</div>
-
-<!-- ÁREA 3 -->
-<div class="area-strip"><div class="area-title">Área 3</div></div>
-<div class="section-container">
-<div class="section-header">
-  <h2>Análise técnica</h2>
-  <div class="title-underline"></div>
-</div>
-
-<div class="field">
-  <div class="field-title">Comentários gerais referente ao atendimento</div>
-  <div class="md-input md-textarea"><textarea id="comentarios"></textarea></div>
-</div>
-
-<div class="field">
-<div class="field-title">Anexos da Análise Técnica</div>
-<input type="file" id="fotosAnalise" multiple accept="image/*">
-<div class="preview-container" id="previewAnalise"></div>
-</div>
-</div>
-
-<div class="buttons">
-<button class="btn" onclick="gerarPDF()">Exportar PDF</button>
-<button class="btn">Registrar</button>
-</div>
-
+<!-- BIBLIOTECAS DE PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-// PERGUNTAS DINÂMICAS
-const perguntasDefeitos = {
-"DEFEITOS PONTUAIS": [
-"FOI ENCONTRADO ANTES OU DEPOIS DO PROCESSAMENTO?",
-"HOUVE APROVEITAMENTO DA CHAPA?",
-"O DEFEITO É VISTO EM TODAS AS CHAPAS?",
-"QUAL A QUANTIDADE DE DEFEITOS?",
-"QUAL FOI A PERCA REAL?",
-"TEM AMOSTRAS SEGREGADAS PARA ENVIO?"
-],
-"DIFICULDADE DE CORTE": [
-"A APLICAÇÃO DO OLEO DE CORTE ESTA NORMAL?",
-"A PRESSÃO DA FERRAMENTA FOI AJUSTADA?",
-"HÁ PRESENÇA DE PROBLEMAS NO DESTAQUE?",
-"MESA DE CORTE ESTÁ EM BOAS CONDIÇÕES?",
-"O MATERIAL ESTA SEGREGADO?",
-"QUAL A PRESSÃO UTILIZADA?",
-"QUAL FOI A PERDA REAL?",
-"QUAL O ÂNGULO DO RODIZIO?",
-"QUANTO TEMPO É FEITO A TROCA DOS RODIZIOS?",
-"TODAS AS CHAPAS ESTÃO QUEBRANDO DURANTE O CORTE?"
-],
-"FALTA DE CHAPAS": [
-"A FALTA FOI VISTA NO DESCARREGAMENTO?",
-"POSSUI O RIE? ENVIAR CÓPIA",
-"QUANTAS CHAPAS FALTAM?"
-],
-"MANCHAS/IRISAÇÃO": [
-"HÁ INDÍCIOS DE ÁGUA NAS PILHAS?",
-"HOUVE BENEFICIAMENTO DOS LOTES?",
-"O MATERIAL ESTA SEGREGADO?",
-"QUAL FOI A PERDA REAL?",
-"TODAS AS CHAPAS COM MANCHAS?"
-],
-"RISCO": [
-"É POSSÍVEL SENTIR O RISCO AO TOCAR?",
-"ESTÁ DO LADO BANHO OU ATMOSFERA?",
-"O RISCO É CONTÍNUO OU INTERMITENTE?",
-"NO VIDRO BASE OU PRODUTO ACABADO?",
-"PODE ENVIAR CROQUI?",
-"QUAL O SENTIDO DO RISCO?"
-],
-"VIDRO MOLHADO": [
-"AVARIA NA LONA DO CAMINHÃO?",
-"SERÁ PROCESSADO RÁPIDO?",
-"SE SIM, HOUVE PERDA?",
-"TODAS AS CHAPAS MOLHADAS?"
-]
-};
-
-document.getElementById("defeito").addEventListener("change", () => {
-const defeito = document.getElementById("defeito").value;
-const container = document.getElementById("perguntas");
-container.innerHTML = "";
-perguntasDefeitos[defeito]?.forEach(perg => {
-  container.innerHTML += `
-    <div class='field'>
-      <div class='field-title'>${perg}</div>
-      <div class='md-input md-textarea'>
-        <textarea rows='2'></textarea>
-      </div>
-    </div>
-  `;
-});
-});
-
-// PRÉ-VISUALIZAÇÃO + EXCLUSÃO
-function setupPreview(inputId, previewId) {
-const input = document.getElementById(inputId);
-const preview = document.getElementById(previewId);
-let imagens = [];
-
-function renderPreview() {
-preview.innerHTML = "";
-imagens.forEach((file, index) => {
-  const reader = new FileReader();
-  reader.onload = e => {
-    const div = document.createElement("div");
-    div.className = "preview-item";
-
-    const img = document.createElement("img");
-    img.src = e.target.result;
-
-    const del = document.createElement("div");
-    del.className = "delete-btn";
-    del.innerText = "×";
-    del.onclick = () => {
-      imagens.splice(index, 1);
-      renderPreview();
-    };
-
-    div.appendChild(img);
-    div.appendChild(del);
-    preview.appendChild(div);
+  const perguntasPorDefeito = {
+    "DEFEITOS PONTUAIS": [
+      "FOI ENCONTRADO ANTES OU DEPOIS DO PROCESSAMENTO?",
+      "HOUVE APROVEITAMENTO DA CHAPA?",
+      "O DEFEITO É VISTO EM TODAS AS CHAPAS?",
+      "QUAL A QUANTIDADE DE DEFEITOS?",
+      "QUAL FOI A PERCA REAL?",
+      "TEM AMOSTRAS SEGREGADAS PARA ENVIO?"
+    ],
+    "DIFICULDADE DE CORTE": [
+      "A APLICAÇÃO DO OLEO DE CORTE ESTA NORMAL?",
+      "A PRESSÃO DA FERRAMENTA FOI AJUSTADA?",
+      "HÁ PRESENÇA DE PROBLEMAS NO DESTAQUE ( SERRILHADO, BICOS, TRINCAS, ETC)?",
+      "MESA DE CORTE ESTÁ EM BOAS CONDIÇÕES?",
+      "O MATERIAL ESTA SEGREGADO?",
+      "QUAL A PRESSÃO UTILIZADA NO CORT?",
+      "QUAL FOI A PERDA REAL?",
+      "QUAL O ÂNGULO DO RODIZIO?",
+      "QUANTO TEMPO É FEITO A TROCA DOS RODIZIOS DE CORTE?",
+      "TODAS AS CHAPAS ESTÃO QUEBRANDO DURANTE O CORTE?"
+    ],
+    "FALTA DE CHAPAS": [
+      "A FALTA DA CHAPA FOI VISTA NO ATO DO DESCARREGAMENTO?",
+      "POSSUI O RIE DA CARGA? GENTILEZA ENVIAR UMA CÓPIA.",
+      "QUAL A QUANTIDADE DE CHAPAS FALTANTES NO LOTE?"
+    ],
+    "MANCHAS/IRISAÇÃO": [
+      "HÁ INDICIOS DE ESCORRIMENTO DE ÁGUA NAS PILHAS?",
+      "HOUVE BENEFICIAMENTO DOS LOTES RECLAMADOS? ( CORTE, LAVAGEM, LAPIDAÇÃO, ETC)",
+      "O MATERIAL ESTA SEGREGADO?",
+      "QUAL FOI A PERDA REAL?",
+      "TODAS AS CHAPAS APRESENTAM MANCHAS?"
+    ],
+    "RISCO": [
+      "É POSSÍVEL SENTIR O RISCO AO TOCAR?",
+      "ESTA DO LADO BANHO OU ATMOSFERA?",
+      "O RISCO É CONTÍNUO OU INTERMITENTE?",
+      "O RISCO FOI ENCONTRADO NO VIDRO BASE OU PRODUTO ACABADO?",
+      "PODERIA ENVIAR CROQUI?",
+      "QUAL É O SENTIDO DO RISCO?"
+    ],
+    "VIDRO MOLHADO": [
+      "FOI IDENTIFICADO ALGUMA AVARIA NA LONA DO CAMINHÃO?",
+      "O VIDRO SERÁ PROCESSADO RÁPIDO?",
+      "SE SIM, PODE NOS INFORMAR SE HOUVE PERDA PÓS PROCESSAMENTO?",
+      "TODAS AS CHAPAS APRESENTAM SINAIS DE MOLHADURA?"
+    ],
+    "DEFORMAÇÃO": [
+      "NOS INFORMAR O ÂNGULO E DISTÂNCIA A QUAL É POSSÍVEL OBSERVAR AS DISTORÇÕES",
+      "A DISTORÇÃO FOI OBSERVADA NA MATÉRIA-PRIMA?",
+      "CLIENTE JÁ PROCESSOU TODO O MATERIAL NO QUAL REPORTA O DEFEITO?",
+      "TODAS AS CHAPAS DOS LOTES RECLAMADOS APRESENTARAM DISTORÇÕES? SEMPRE NA MESMA POSIÇÃO?",
+      "A POSIÇÃO EXATA DA DISTORÇÃO NA CHAPA (SE POSSÍVEL ENVIAR UM CROQUI ILUSTRANDO A POSIÇÃO DA DEFORMAÇÃO)",
+      "HOUVE ALGUM TIPO DE APROVEITAMENTO DAS PEÇAS QUE JÁ FORAM PROCESSADAS? SE SIM, QUAL A M² REAL DA PERDA?",
+      "EXISTE AINDA MATERIAL A SER PROCESSADO?"
+    ],
+    "EMPENAMENTO": [
+      "FOI REALIZADA MEDIÇÃO DO EMPENAMENTO? QUAL VALOR ENCONTRADO?",
+      "MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²",
+      "TODAS AS CHAPAS APRESENTAM EMPENAMENTO?",
+      "O MATERIAL ESTÁ SEGREGADO?"
+    ],
+    "DESLOCAMENTO DE CHAPAS": [
+      "DESNÍVEL FOI OBSERVADO EM TODAS AS CHAPAS DA PILHA?",
+      "DESNÍVEL ENTRE AS CHAPAS FOI OBSERVADO EM TODAS AS EXTREMIDADES DA PILHA?",
+      "ENVIAR EVIDÊNCIAS DAS MEDIÇÕES ENCONTRADAS",
+      "MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²"
+    ]
   };
-  reader.readAsDataURL(file);
-});
-}
 
-input.addEventListener("change", () => {
-Array.from(input.files).forEach(file => {
-  if (file.type.startsWith("image/") && imagens.length < 10) {
-    imagens.push(file);
+  const selectDefeito = document.getElementById("defeitoReclamado");
+  const perguntasContainer = document.getElementById("perguntasDefeito");
+
+  selectDefeito.addEventListener("change", () => {
+    const defeito = selectDefeito.value;
+    const perguntas = perguntasPorDefeito[defeito] || [];
+
+    if (!perguntas.length) {
+      perguntasContainer.innerHTML =
+        '<div class="hint">NÃO HÁ PERGUNTAS PARA ESTE ITEM.</div>';
+      return;
+    }
+
+    let html = "";
+    perguntas.forEach((p, i) => {
+      html += `
+        <div class="question-block">
+          <div class="question-text">${p}</div>
+          <div class="md-input">
+            <textarea rows="2" id="resp_${defeito.replace(/\s+/g,'_')}_${i}" placeholder="Responda aqui"></textarea>
+          </div>
+        </div>`;
+    });
+    perguntasContainer.innerHTML = html;
+  });
+
+  function setupPreview(inputId, previewId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    if (!input) return;
+
+    input.addEventListener("change", () => {
+      preview.innerHTML = "";
+      const files = Array.from(input.files).slice(0, 10);
+
+      files.forEach(file => {
+        if (file.type.startsWith("image/")) {
+          const reader = new FileReader();
+          reader.onload = e => {
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.className = "preview-img";
+            preview.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
   }
-});
-renderPreview();
-});
-}
 
-setupPreview("fotos", "preview");
-setupPreview("fotosAnalise", "previewAnalise");
+  setupPreview("anexoObs", "previewObs");
+  setupPreview("anexoAnaliseTecnica", "previewAnaliseTecnica");
 
-// EXPORTAR PDF
-async function gerarPDF() {
-const { jsPDF } = window.jspdf;
-const doc = new jsPDF({ unit: "mm", format: "a4" });
+  async function gerarPDF() {
+    const { jsPDF } = window.jspdf;
+    const rac = document.getElementById("rac-container");
 
-doc.setFontSize(18);
-doc.text("RELATÓRIO DE ATENDIMENTO", 15, 15);
-doc.save("RAC.pdf");
-}
+    const canvas = await html2canvas(rac, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "pt", "a4");
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgWidth = pageWidth;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft > 0) {
+      position -= pageHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    pdf.save("RAC.pdf");
+  }
 </script>
 
 </body>
