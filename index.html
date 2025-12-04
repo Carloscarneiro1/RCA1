@@ -148,231 +148,336 @@
       text-transform: uppercase;
       margin-bottom: 4px;
     }
+
+    .hint {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+
+    /* BOTÕES DE AÇÃO */
+    .actions {
+      text-align: right;
+      margin-top: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 8px;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+    }
+
+    .btn-primary {
+      background: #f97316;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(249, 115, 22, 0.4);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(249, 115, 22, 0.5);
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .btn-secondary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(148, 163, 184, 0.4);
+    }
   </style>
 </head>
 
 <body>
 
-<header>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</header>
+<div id="rac-container">
+  <header>RELATÓRIO DE ATENDIMENTO À CLIENTES (RAC)</header>
 
-<!-- ÁREA 1 -->
-<div class="area-strip"><div class="area-title">Área 1</div></div>
+  <!-- ÁREA 1 -->
+  <div class="area-strip"><div class="area-title">Área 1</div></div>
 
-<div class="section-container">
-  <div class="section-header">
-    <h2>Dados gerais</h2>
-    <div class="title-underline"></div>
-  </div>
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Dados gerais</h2>
+      <div class="title-underline"></div>
+    </div>
 
-  <div class="field">
-    <div class="field-title">Data da visita<span class="required">*</span></div>
-    <div class="md-input">
-      <input type="date" id="dataVisita">
+    <div class="field">
+      <div class="field-title">Data da visita<span class="required">*</span></div>
+      <div class="md-input">
+        <input type="date" id="dataVisita">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Nome do analista<span class="required">*</span></div>
+      <div class="md-input">
+        <input id="analista" list="listaAnalistas" placeholder="Digite para pesquisar">
+        <datalist id="listaAnalistas">
+          <option value="Leandro Nogueira"></option>
+          <option value="Mayara Rodrigues"></option>
+          <option value="Celso Penteado"></option>
+          <option value="Carlos Carneiro"></option>
+        </datalist>
+        <span class="md-arrow">▾</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Nome do cliente</div>
+      <div class="md-input">
+        <input type="text" id="nomeCliente" placeholder="Digite o nome do cliente">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Cidade / Estado</div>
+      <div class="md-input">
+        <input type="text" id="cidadeEstado" placeholder="Ex.: Jacareí / SP">
+      </div>
     </div>
   </div>
 
-  <div class="field">
-    <div class="field-title">Nome do analista<span class="required">*</span></div>
-    <div class="md-input">
-      <input id="analista" list="listaAnalistas" placeholder="Digite para pesquisar">
-      <datalist id="listaAnalistas">
-        <option value="Leandro Nogueira"></option>
-        <option value="Mayara Rodrigues"></option>
-        <option value="Celso Penteado"></option>
-        <option value="Carlos Carneiro"></option>
-      </datalist>
-      <span class="md-arrow">▾</span>
+  <!-- ÁREA 2 -->
+  <div class="area-strip"><div class="area-title">Área 2</div></div>
+
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Dados da reclamação</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Número(s) RO</div>
+      <div class="md-input">
+        <input type="text" id="numeroRo" placeholder="Digite o número da RO">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Quantidade total reclamada (m²)</div>
+      <div class="md-input">
+        <input type="number" step="0.01" id="qtdReclamada" placeholder="00,00">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Defeito reclamado<span class="required">*</span></div>
+      <div class="md-input">
+        <select id="defeitoReclamado">
+          <option value="" disabled selected hidden>Selecione</option>
+          <option>DEFEITOS PONTUAIS</option>
+          <option>DIFICULDADE DE CORTE</option>
+          <option>FALTA DE CHAPAS</option>
+          <option>MANCHAS/IRISAÇÃO</option>
+          <option>RISCO</option>
+          <option>VIDRO MOLHADO</option>
+          <option>DEFORMAÇÃO</option>
+          <option>EMPENAMENTO</option>
+          <option>DESLOCAMENTO DE CHAPAS</option>
+        </select>
+        <span class="md-arrow">▾</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Perguntas relacionadas ao defeito</div>
+      <div id="perguntasDefeito">
+        <div class="hint">Selecione um defeito para exibir as perguntas.</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Observações</div>
+      <div class="md-input">
+        <textarea id="obsReclamacao" rows="3"></textarea>
+      </div>
+      <div class="attach-row">
+        <div class="attach-label">📎 ANEXAR ARQUIVO(S)</div><br>
+        <input type="file" id="anexoObs" multiple>
+      </div>
     </div>
   </div>
 
-  <div class="field">
-    <div class="field-title">Nome do cliente</div>
-    <div class="md-input">
-      <input type="text" id="nomeCliente" placeholder="Digite o nome do cliente">
+  <!-- ÁREA 3 -->
+  <div class="area-strip"><div class="area-title">Área 3</div></div>
+
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Análise técnica</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="field">
+      <div class="field-title">Comentários gerais referente ao atendimento</div>
+      <div class="md-input">
+        <textarea id="comentariosGerais" rows="3" placeholder="Descreva sua análise técnica aqui"></textarea>
+      </div>
+      <div class="attach-row">
+        <div class="attach-label">📎 ANEXAR ARQUIVO(S)</div><br>
+        <input type="file" id="anexoAnaliseTecnica" multiple>
+      </div>
     </div>
   </div>
 
-  <div class="field">
-    <div class="field-title">Cidade / Estado</div>
-    <div class="md-input">
-      <input type="text" id="cidadeEstado" placeholder="Ex.: Jacareí / SP">
+  <!-- ÁREA DE AÇÕES -->
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Ações</h2>
+      <div class="title-underline"></div>
     </div>
-  </div>
-</div>
-
-<!-- ÁREA 2 -->
-<div class="area-strip"><div class="area-title">Área 2</div></div>
-
-<div class="section-container">
-  <div class="section-header">
-    <h2>Dados da reclamação</h2>
-    <div class="title-underline"></div>
-  </div>
-
-  <div class="field">
-    <div class="field-title">Número(s) RO</div>
-    <div class="md-input">
-      <input type="text" id="numeroRo" placeholder="Digite o número da RO">
+    <div class="actions">
+      <!-- sem funcionalidade por enquanto, como você pediu -->
+      <button type="button" class="btn btn-secondary">Registrar</button>
+      <!-- botão que gera o PDF -->
+      <button type="button" class="btn btn-primary" onclick="gerarPDF()">Exportar em PDF</button>
     </div>
   </div>
 
-  <div class="field">
-    <div class="field-title">Quantidade total reclamada (m²)</div>
-    <div class="md-input">
-      <input type="number" step="0.01" id="qtdReclamada" placeholder="00,00">
-    </div>
-  </div>
+</div> <!-- fim do rac-container -->
 
-  <div class="field">
-    <div class="field-title">Defeito reclamado<span class="required">*</span></div>
-    <div class="md-input">
-      <select id="defeitoReclamado">
-        <option value="" disabled selected hidden>Selecione</option>
-        <option>DEFEITOS PONTUAIS</option>
-        <option>DIFICULDADE DE CORTE</option>
-        <option>FALTA DE CHAPAS</option>
-        <option>MANCHAS/IRISAÇÃO</option>
-        <option>RISCO</option>
-        <option>VIDRO MOLHADO</option>
-        <option>DEFORMAÇÃO</option>
-        <option>EMPENAMENTO</option>
-        <option>DESLOCAMENTO DE CHAPAS</option>
-      </select>
-      <span class="md-arrow">▾</span>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="field-title">Perguntas relacionadas ao defeito</div>
-    <div id="perguntasDefeito">
-      <div class="hint">Selecione um defeito para exibir as perguntas.</div>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="field-title">Observações</div>
-    <div class="md-input"><textarea id="obsReclamacao" rows="3"></textarea></div>
-    <input type="file" multiple>
-  </div>
-
-</div>
-
-<!-- ÁREA 3 -->
-<div class="area-strip"><div class="area-title">Área 3</div></div>
-
-<div class="section-container">
-  <div class="section-header">
-    <h2>Análise técnica</h2>
-    <div class="title-underline"></div>
-  </div>
-
-  <div class="field">
-    <div class="field-title">Comentários gerais referente ao atendimento</div>
-    <div class="md-input">
-      <textarea id="comentariosGerais" rows="3" placeholder="Descreva sua análise técnica aqui"></textarea>
-    </div>
-    <div class="attach-row">
-      <div class="attach-label">📎 ANEXAR ARQUIVO(S)</div><br>
-      <input type="file" id="anexoAnaliseTecnica" multiple>
-    </div>
-  </div>
-
-</div>
+<!-- BIBLIOTECAS PARA PDF (CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-const perguntasPorDefeito = {
-"DEFEITOS PONTUAIS": [
-"FOI ENCONTRADO ANTES OU DEPOIS DO PROCESSAMENTO?",
-"HOUVE APROVEITAMENTO DA CHAPA?",
-"O DEFEITO É VISTO EM TODAS AS CHAPAS?",
-"QUAL A QUANTIDADE DE DEFEITOS?",
-"QUAL FOI A PERCA REAL?",
-"TEM AMOSTRAS SEGREGADAS PARA ENVIO?"
-],
-"DIFICULDADE DE CORTE": [
-"A APLICAÇÃO DO OLEO DE CORTE ESTA NORMAL?",
-"A PRESSÃO DA FERRAMENTA FOI AJUSTADA?",
-"HÁ PRESENÇA DE PROBLEMAS NO DESTAQUE ( SERRILHADO, BICOS, TRINCAS, ETC)?",
-"MESA DE CORTE ESTÁ EM BOAS CONDIÇÕES?",
-"O MATERIAL ESTA SEGREGADO?",
-"QUAL A PRESSÃO UTILIZADA NO CORT?",
-"QUAL FOI A PERDA REAL?",
-"QUAL O ÂNGULO DO RODIZIO?",
-"QUANTO TEMPO É FEITO A TROCA DOS RODIZIOS DE CORTE?",
-"TODAS AS CHAPAS ESTÃO QUEBRANDO DURANTE O CORTE?"
-],
-"FALTA DE CHAPAS": [
-"A FALTA DA CHAPA FOI VISTA NO ATO DO DESCARREGAMENTO?",
-"POSSUI O RIE DA CARGA? GENTILEZA ENVIAR UMA CÓPIA.",
-"QUAL A QUANTIDADE DE CHAPAS FALTANTES NO LOTE?"
-],
-"MANCHAS/IRISAÇÃO": [
-"HÁ INDICIOS DE ESCORRIMENTO DE ÁGUA NAS PILHAS?",
-"HOUVE BENEFICIAMENTO DOS LOTES RECLAMADOS? ( CORTE, LAVAGEM, LAPIDAÇÃO, ETC)",
-"O MATERIAL ESTA SEGREGADO?",
-"QUAL FOI A PERDA REAL?",
-"TODAS AS CHAPAS APRESENTAM MANCHAS?"
-],
-"RISCO": [
-"É POSSÍVEL SENTIR O RISCO AO TOCAR?",
-"ESTA DO LADO BANHO OU ATMOSFERA?",
-"O RISCO É CONTÍNUO OU INTERMITENTE?",
-"O RISCO FOI ENCONTRADO NO VIDRO BASE OU PRODUTO ACABADO?",
-"PODERIA ENVIAR CROQUI?",
-"QUAL É O SENTIDO DO RISCO?"
-],
-"VIDRO MOLHADO": [
-"FOI IDENTIFICADO ALGUMA AVARIA NA LONA DO CAMINHÃO?",
-"O VIDRO SERÁ PROCESSADO RÁPIDO?",
-"SE SIM, PODE NOS INFORMAR SE HOUVE PERDA PÓS PROCESSAMENTO?",
-"TODAS AS CHAPAS APRESENTAM SINAIS DE MOLHADURA?"
-],
-"DEFORMAÇÃO": [
-"NOS INFORMAR O ÂNGULO E DISTÂNCIA A QUAL É POSSÍVEL OBSERVAR AS DISTORÇÕES",
-"A DISTORÇÃO FOI OBSERVADA NA MATÉRIA-PRIMA?",
-"CLIENTE JÁ PROCESSOU TODO O MATERIAL NO QUAL REPORTA O DEFEITO?",
-"TODAS AS CHAPAS DOS LOTES RECLAMADOS APRESENTARAM DISTORÇÕES? SEMPRE NA MESMA POSIÇÃO?",
-"A POSIÇÃO EXATA DA DISTORÇÃO NA CHAPA (SE POSSÍVEL ENVIAR UM CROQUI ILUSTRANDO A POSIÇÃO DA DEFORMAÇÃO)",
-"HOUVE ALGUM TIPO DE APROVEITAMENTO DAS PEÇAS QUE JÁ FORAM PROCESSADAS? SE SIM, QUAL A M² REAL DA PERDA?",
-"EXISTE AINDA MATERIAL A SER PROCESSADO?"
-],
-"EMPENAMENTO": [
-"FOI REALIZADA MEDIÇÃO DO EMPENAMENTO? QUAL VALOR ENCONTRADO?",
-"MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²",
-"TODAS AS CHAPAS APRESENTAM EMPENAMENTO?",
-"O MATERIAL ESTÁ SEGREGADO?"
-],
-"DESLOCAMENTO DE CHAPAS": [
-"DESNÍVEL FOI OBSERVADO EM TODAS AS CHAPAS DA PILHA?",
-"DESNÍVEL ENTRE AS CHAPAS FOI OBSERVADO EM TODAS AS EXTREMIDADES DA PILHA?",
-"ENVIAR EVIDÊNCIAS DAS MEDIÇÕES ENCONTRADAS",
-"MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²"
-]
-};
+  const perguntasPorDefeito = {
+    "DEFEITOS PONTUAIS": [
+      "FOI ENCONTRADO ANTES OU DEPOIS DO PROCESSAMENTO?",
+      "HOUVE APROVEITAMENTO DA CHAPA?",
+      "O DEFEITO É VISTO EM TODAS AS CHAPAS?",
+      "QUAL A QUANTIDADE DE DEFEITOS?",
+      "QUAL FOI A PERCA REAL?",
+      "TEM AMOSTRAS SEGREGADAS PARA ENVIO?"
+    ],
+    "DIFICULDADE DE CORTE": [
+      "A APLICAÇÃO DO OLEO DE CORTE ESTA NORMAL?",
+      "A PRESSÃO DA FERRAMENTA FOI AJUSTADA?",
+      "HÁ PRESENÇA DE PROBLEMAS NO DESTAQUE ( SERRILHADO, BICOS, TRINCAS, ETC)?",
+      "MESA DE CORTE ESTÁ EM BOAS CONDIÇÕES?",
+      "O MATERIAL ESTA SEGREGADO?",
+      "QUAL A PRESSÃO UTILIZADA NO CORT?",
+      "QUAL FOI A PERDA REAL?",
+      "QUAL O ÂNGULO DO RODIZIO?",
+      "QUANTO TEMPO É FEITO A TROCA DOS RODIZIOS DE CORTE?",
+      "TODAS AS CHAPAS ESTÃO QUEBRANDO DURANTE O CORTE?"
+    ],
+    "FALTA DE CHAPAS": [
+      "A FALTA DA CHAPA FOI VISTA NO ATO DO DESCARREGAMENTO?",
+      "POSSUI O RIE DA CARGA? GENTILEZA ENVIAR UMA CÓPIA.",
+      "QUAL A QUANTIDADE DE CHAPAS FALTANTES NO LOTE?"
+    ],
+    "MANCHAS/IRISAÇÃO": [
+      "HÁ INDICIOS DE ESCORRIMENTO DE ÁGUA NAS PILHAS?",
+      "HOUVE BENEFICIAMENTO DOS LOTES RECLAMADOS? ( CORTE, LAVAGEM, LAPIDAÇÃO, ETC)",
+      "O MATERIAL ESTA SEGREGADO?",
+      "QUAL FOI A PERDA REAL?",
+      "TODAS AS CHAPAS APRESENTAM MANCHAS?"
+    ],
+    "RISCO": [
+      "É POSSÍVEL SENTIR O RISCO AO TOCAR?",
+      "ESTA DO LADO BANHO OU ATMOSFERA?",
+      "O RISCO É CONTÍNUO OU INTERMITENTE?",
+      "O RISCO FOI ENCONTRADO NO VIDRO BASE OU PRODUTO ACABADO?",
+      "PODERIA ENVIAR CROQUI?",
+      "QUAL É O SENTIDO DO RISCO?"
+    ],
+    "VIDRO MOLHADO": [
+      "FOI IDENTIFICADO ALGUMA AVARIA NA LONA DO CAMINHÃO?",
+      "O VIDRO SERÁ PROCESSADO RÁPIDO?",
+      "SE SIM, PODE NOS INFORMAR SE HOUVE PERDA PÓS PROCESSAMENTO?",
+      "TODAS AS CHAPAS APRESENTAM SINAIS DE MOLHADURA?"
+    ],
+    "DEFORMAÇÃO": [
+      "NOS INFORMAR O ÂNGULO E DISTÂNCIA A QUAL É POSSÍVEL OBSERVAR AS DISTORÇÕES",
+      "A DISTORÇÃO FOI OBSERVADA NA MATÉRIA-PRIMA?",
+      "CLIENTE JÁ PROCESSOU TODO O MATERIAL NO QUAL REPORTA O DEFEITO?",
+      "TODAS AS CHAPAS DOS LOTES RECLAMADOS APRESENTARAM DISTORÇÕES? SEMPRE NA MESMA POSIÇÃO?",
+      "A POSIÇÃO EXATA DA DISTORÇÃO NA CHAPA (SE POSSÍVEL ENVIAR UM CROQUI ILUSTRANDO A POSIÇÃO DA DEFORMAÇÃO)",
+      "HOUVE ALGUM TIPO DE APROVEITAMENTO DAS PEÇAS QUE JÁ FORAM PROCESSADAS? SE SIM, QUAL A M² REAL DA PERDA?",
+      "EXISTE AINDA MATERIAL A SER PROCESSADO?"
+    ],
+    "EMPENAMENTO": [
+      "FOI REALIZADA MEDIÇÃO DO EMPENAMENTO? QUAL VALOR ENCONTRADO?",
+      "MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²",
+      "TODAS AS CHAPAS APRESENTAM EMPENAMENTO?",
+      "O MATERIAL ESTÁ SEGREGADO?"
+    ],
+    "DESLOCAMENTO DE CHAPAS": [
+      "DESNÍVEL FOI OBSERVADO EM TODAS AS CHAPAS DA PILHA?",
+      "DESNÍVEL ENTRE AS CHAPAS FOI OBSERVADO EM TODAS AS EXTREMIDADES DA PILHA?",
+      "ENVIAR EVIDÊNCIAS DAS MEDIÇÕES ENCONTRADAS",
+      "MATERIAL FOI PROCESSADO? HOUVE ALGUMA PERDA DURANTE O PROCESSAMENTO? ENVIAR QUANTIDADE DE PERDA M²"
+    ]
+  };
 
-document.getElementById("defeitoReclamado").addEventListener("change", function () {
-  const defeito = this.value;
-  const perguntas = perguntasPorDefeito[defeito] || [];
-  const container = document.getElementById("perguntasDefeito");
+  const selectDefeito = document.getElementById("defeitoReclamado");
+  const perguntasContainer = document.getElementById("perguntasDefeito");
 
-  if (!perguntas.length) {
-    container.innerHTML = '<div class="hint">NÃO HÁ PERGUNTAS PARA ESTE ITEM.</div>';
-    return;
-  }
+  selectDefeito.addEventListener("change", () => {
+    const defeito = selectDefeito.value;
+    const perguntas = perguntasPorDefeito[defeito] || [];
 
-  let html = "";
-  perguntas.forEach((p, i) => {
-    html += `
-      <div class="question-block">
-        <div class="question-text">${p}</div>
-        <div class="md-input">
-          <textarea rows="2" id="resp_${defeito.replace(/\\s+/g,'_')}_${i}" placeholder="Responda aqui"></textarea>
-        </div>
-      </div>`;
+    if (!perguntas.length) {
+      perguntasContainer.innerHTML =
+        '<div class="hint">NÃO HÁ PERGUNTAS PARA ESTE ITEM.</div>';
+      return;
+    }
+
+    let html = "";
+    perguntas.forEach((p, i) => {
+      html += `
+        <div class="question-block">
+          <div class="question-text">${p}</div>
+          <div class="md-input">
+            <textarea rows="2" id="resp_${defeito.replace(/\s+/g,'_')}_${i}" placeholder="Responda aqui"></textarea>
+          </div>
+        </div>`;
+    });
+
+    perguntasContainer.innerHTML = html;
   });
 
-  container.innerHTML = html;
-});
+  // GERAÇÃO DE PDF (captura o container inteiro)
+  async function gerarPDF() {
+    const { jsPDF } = window.jspdf;
+    const rac = document.getElementById("rac-container");
+
+    const canvas = await html2canvas(rac, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "pt", "a4");
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgWidth = pageWidth;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft > 0) {
+      position -= pageHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    pdf.save("RAC.pdf");
+  }
 </script>
 
 </body>
